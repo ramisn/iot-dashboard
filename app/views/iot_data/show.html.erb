@@ -1,0 +1,53 @@
+<% content_for(:page_header) do %>
+  <%= "IoT Data" %>
+<% end %>
+<% content_for :panel_heading do %><% end %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Workbench number:</strong>
+  <%= @iot_datum.workbench_number %>
+</p>
+
+<p>
+  <strong>Part number:</strong>
+  <%= @iot_datum.part_number %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @iot_datum.target %>
+</p>
+
+<p>
+  <strong>Lot size:</strong>
+  <%= @iot_datum.lot_size %>
+</p>
+
+<p>
+  <strong>Employee name:</strong>
+  <%= @iot_datum.employee_name %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @iot_datum.employee_id %>
+</p>
+
+<p>
+  <strong>Shift:</strong>
+  <%= @iot_datum.shift %>
+</p>
+
+<p>
+  <strong>Device:</strong>
+  <%= @iot_datum.device_id %>
+</p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @iot_datum.count %>
+</p>
+
+<%= link_to 'Edit', edit_iot_datum_path(@iot_datum) %> |
+<%= link_to 'Back', iot_data_path %>
