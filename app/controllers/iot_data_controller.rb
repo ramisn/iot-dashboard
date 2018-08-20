@@ -1,4 +1,5 @@
 class IotDataController < ApplicationController
+  protect_from_forgery with: :null_session
   before_action :set_iot_datum, only: [:show, :edit, :update, :destroy]
 
   # GET /iot_data
