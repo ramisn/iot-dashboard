@@ -1,5 +1,7 @@
 User.create!([
-  {email: "example@email.com", password: "123456example", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, name: "Example user"}
+  {#email: "example@email.com", password: "123456example", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, name: "Example user1",
+    email: "admin@email.com", password: "123456Admin", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, name: "Admin"}
+  # email: "admin_one@email.com", password: "123456Admin1", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, name: "Admin1"}
 ])
 ApiKey.create!([
   {access_token: "ac4bd425935c350a54aabb362906283f", expires_at: "2043-03-29 21:54:04", user_id: User.first.id, active: true}

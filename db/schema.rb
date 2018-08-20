@@ -46,8 +46,6 @@ ActiveRecord::Schema.define(version: 20180820095002) do
     t.integer  "sensor_id",  limit: 4
   end
 
-  add_index "measures", ["sensor_id"], name: "fk_rails_b8fea6b625", using: :btree
-
   create_table "sensors", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.text     "description", limit: 65535
@@ -75,5 +73,4 @@ ActiveRecord::Schema.define(version: 20180820095002) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "measures", "sensors"
 end
