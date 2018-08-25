@@ -1,0 +1,15 @@
+<h1>Upload the Data</h1>
+
+<p>
+  Download:
+  <%= link_to "Download Template", import_index_path(format: "csv") %> |
+  <%#= link_to "Excel", import_index_path(format: "xls") %>
+</p>
+
+
+<h2>Import Data</h2>
+
+<%= form_tag import_import_index_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import", class: 'btn btn-success' %>
+<% end %>

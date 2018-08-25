@@ -15,6 +15,7 @@ gem 'mysql2', '~> 0.3.18'
 gem 'thin'
 gem 'seed_dump'
 gem 'bootstrap_sb_admin_base_v2'
+gem 'roo'
 
 # API Stuff
 gem 'grape'

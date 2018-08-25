@@ -186,7 +186,11 @@ GEM
     redcarpet (3.3.4)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
+    roo (2.7.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
     rouge (2.0.1)
+    rubyzip (1.2.1)
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -257,6 +261,7 @@ DEPENDENCIES
   rails_12factor
   rails_layout
   redcarpet
+  roo
   rouge
   sass-rails (~> 5.0)
   seed_dump

@@ -8,15 +8,78 @@ class IotDataController < ApplicationController
     @iot_data = IotDatum.all
     device_id = params[:device_id] if params[:device_id]
     count = params[:count] if params[:count]
-    # # @bot_details = BotDetail.where("vcv_no = ? and vcv_date_time like ?", params[:vcv_no],"%#{vcv_date}%") if params[:vcv_no] && params[:vcv_date_time]
-    # @iot_datas = IotDatum.where("device_id = ?", params[:vcv_no]) if params[:vcv_no]
-    @iot_data = IotDatum.where("device_id = ? and count = ?", params[:device_id],params[:count]) if params[:device_id] && params[:count]
+    part = params[:part_number] if params[:part_number]
+    
+      @iot_data = IotDatum.where("device_id = ? and count = ? and part_number = ?", params[:device_id],params[:count], params[:part_number]) if device_id && count && part
+      
+      if params[:status]
+        @iot_datas = IotDatum.where("status = ?", 'Processing') 
+        render json: @iot_datas
+      end
+      
+    if device_id != nil
+      @iot_dataa = IotDatum.find_by(device_id: device_id) 
+      target = @iot_dataa.target if @iot_dataa
+      
+      if (count.to_i <= target.to_i ) && (count.to_i != 0)
+        @iot_dataa.device_id = device_id
+        @iot_dataa.count = count
+        # @iot_dataa.status = 'Processing'
+        @iot_dataa.save! 
+      elsif count.to_i == 0
+        @iot_dataa.status = 'Yet to Start'
+        @iot_dataa.save!
+      else
+        redirect_to root_url, notice: 'Process Completed'
+      end
+
+      if count.to_i == @iot_dataa.target
+        @iot_dataa.status = 'Process Completed'
+        @iot_dataa.save! 
+      end
+    end 
 
   end
 
   # GET /iot_data/1
   # GET /iot_data/1.json
   def show
+  end
+
+  def process_start
+
+      id = params[:iot_datum_id]
+      
+      @iot_data = IotDatum.find_by(id: id) if id
+      @iot_data.status = 'Processing'
+      @iot_data.save! 
+      # device_id = @iot_data.device_id
+      # part_no = @iot_data.part_number
+      # target = @iot_data.target
+      # lot_size = @iot_data.lot_size
+      # @iot_datas = IotDatum.where("device_id = ? and part_number = ? and target = ? and lot_size = ?", device_id, part_no, target, lot_size) if @iot_data
+      # puts @iot_datas.inspect
+      # puts @iot_data.inspect
+      # render json: @iot_data
+
+      # require 'net/http'
+      # # t = Thread.start do
+      #   uri = URI('http://192.168.1.112')
+      #   res = Net::HTTP.post_form(uri, 'q' => 'ruby', 'max' => '50')
+      #   puts res.body
+      # # end
+      # # t.kill
+      
+      # respond_to do |format|
+      #   format.json { render :json, status: :created, location: @iot_data }
+      # end
+    # @iot_data = IotDatum.where("device_id = ? and count = ?", params[:device_id],params[:count]) if device_id && count
+      redirect_to root_url, notice: 'Process Started'
+  end
+
+  def import
+    IotDatum.import(params[:file])
+    redirect_to root_url, notice: 'Data imported.'
   end
 
   # GET /iot_data/new
@@ -76,6 +139,6 @@ class IotDataController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def iot_datum_params
-      params.require(:iot_datum).permit(:workbench_number, :part_number, :target, :lot_size, :employee_name, :employee_id, :shift, :device_id, :count)
+      params.require(:iot_datum).permit(:workbench_number, :part_number, :target, :lot_size, :employee_name, :employee_id, :shift, :device_id, :count, :status)
     end
 end

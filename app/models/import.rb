@@ -1,6 +1,7 @@
 require 'csv'
-class IotDatum < ActiveRecord::Base
 
+class Measure < ActiveRecord::Base
+  belongs_to :IotDatum
 
 	def self.import(file)
     spreadsheet = Roo::Spreadsheet.open(file.path)
