@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20180821110313) do
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "iot_data", force: :cascade do |t|
-    t.integer  "workbench_number", limit: 4
-    t.decimal  "part_number",                  precision: 10
+    t.string   "workbench_number", limit: 255
+    t.string   "part_number",      limit: 255
     t.integer  "target",           limit: 4
     t.integer  "lot_size",         limit: 4
     t.string   "employee_name",    limit: 255
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20180821110313) do
     t.string   "shift",            limit: 255
     t.integer  "device_id",        limit: 4
     t.integer  "count",            limit: 4
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "status",           limit: 255
   end
 
