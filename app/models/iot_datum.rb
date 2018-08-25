@@ -14,7 +14,7 @@ class IotDatum < ActiveRecord::Base
   end 
 
   def self.to_csv(options = {})
-    desired_columns = ["Workbench number", "Part number", "Target", "Lot Size", "Employee Name", "Employee ID", "Shift", "Device ID", "Count", "Status"]
+    desired_columns = ["workbench_number", "part_number", "target", "lot_size", "employee_name", "employee_id", "shift", "device_id", "count", "status"]
     CSV.generate(options) do |csv|
       csv << desired_columns
       all.each do |product|
@@ -23,5 +23,3 @@ class IotDatum < ActiveRecord::Base
     end
   end
 end
-
-
