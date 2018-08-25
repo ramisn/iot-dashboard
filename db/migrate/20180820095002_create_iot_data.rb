@@ -1,7 +1,7 @@
 class CreateIotData < ActiveRecord::Migration
   def change
     create_table :iot_data do |t|
-      t.string :workbench_number
+      t.integer :workbench_number
       t.string :part_number
       t.integer :target
       t.integer :lot_size

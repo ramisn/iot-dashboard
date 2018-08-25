@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20180821110313) do
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "iot_data", force: :cascade do |t|
-    t.string   "workbench_number", limit: 255
+    t.integer  "workbench_number", limit: 4
     t.string   "part_number",      limit: 255
     t.integer  "target",           limit: 4
     t.integer  "lot_size",         limit: 4
