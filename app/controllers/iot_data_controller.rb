@@ -18,14 +18,17 @@ class IotDataController < ApplicationController
       end
       
     if device_id != nil
-      @iot_dataa = IotDatum.find_by(device_id: device_id) 
+      @iot_dataa = IotDatum.find_by(device_id: device_id, part_number: part) 
       target = @iot_dataa.target if @iot_dataa
-      
+      puts @iot_dataa.inspect
       if (count.to_i <= target.to_i ) && (count.to_i != 0)
         @iot_dataa.device_id = device_id
         @iot_dataa.count = count
         # @iot_dataa.status = 'Processing'
         @iot_dataa.save! 
+        if @iot_dataa.save
+          # seq_data_entry
+        end
       elsif count.to_i == 0
         @iot_dataa.status = 'Yet to Start'
         @iot_dataa.save!
@@ -44,6 +47,11 @@ class IotDataController < ApplicationController
   # GET /iot_data/1
   # GET /iot_data/1.json
   def show
+  end
+
+  def seq_data_entry
+    @iot_datum = IotDatum.new(iot_datum_params)
+    @iot_datum.save!
   end
 
   def process_start
