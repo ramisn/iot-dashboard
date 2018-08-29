@@ -6,7 +6,7 @@
 
 <!-- <h1>Listing Iot Data</h1> -->
 
-<table id="iot" class="display table" cellspacing="0" width="80%">
+<table id="iottt" class="display table" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th>WB No</th>
@@ -19,13 +19,13 @@
       <th>Device</th>
       <th>Count</th>
       <th>Status</th>
+      <th>Actions</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @iot_data.each do |iot_datum| %>
-    <%#= link_to 'Start Process', iot_datum_process_start_path(iot_datum)%>
       <tr>
         <td><%= iot_datum.workbench_number %></td>
         <td><%= iot_datum.part_number %></td>
@@ -35,7 +35,7 @@
         <td><%= iot_datum.employee_id %></td>
         <td><%= iot_datum.shift %></td>
         <td><%= iot_datum.device_id %></td>
-        <b><td style="color:#007bb6;font-weight: bold;"><%= iot_datum.count %></td></b>
+        <td style="color:#007bb6;font-weight: bold;" id="ct"><%= iot_datum.count %></td>
         <td><%= iot_datum.status %></td>
         <td class="action-buttons">
           <% if iot_datum.status == 'Processing' || iot_datum.status == 'YTS' %>
@@ -58,8 +58,16 @@
 <% content_for(:extra_scripts) do %>
   
   <script type="text/javascript">
+    // function update(){ 
+    //     $.get('/', function(data) {
+    //       $('#ct').load(true);
+    //       console.log('Test');
+    //     });
+    // }
     $(document).ready(function() {
-      $('#iot').DataTable({ responsive: true });
+      $('#iottt').DataTable({ responsive: true });
+      setInterval('window.location.reload()', 5000);
+      // window.setInterval('update()', 3*1000);
     });
   </script>
 <% end %>

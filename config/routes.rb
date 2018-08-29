@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :charts
+  resources :trackers
   resources :import  do
     collection do
       post :import

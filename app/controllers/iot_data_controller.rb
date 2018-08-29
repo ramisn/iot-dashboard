@@ -17,20 +17,20 @@ class IotDataController < ApplicationController
         render json: @iot_datas
       end
       
-    if device_id != nil
+    if device_id != nil && part != nil
       @iot_dataa = IotDatum.find_by(device_id: device_id, part_number: part) 
       target = @iot_dataa.target if @iot_dataa
       puts @iot_dataa.inspect
-      if (count.to_i <= target.to_i ) && (count.to_i != 0)
+      if (count.to_i <= target.to_i ) && (@iot_dataa.status = 'Processing')
         @iot_dataa.device_id = device_id
         @iot_dataa.count = count
         # @iot_dataa.status = 'Processing'
         @iot_dataa.save! 
         if @iot_dataa.save
-          # seq_data_entry
+          seq_data_entry(@iot_dataa)
         end
       elsif count.to_i == 0
-        @iot_dataa.status = 'Yet to Start'
+        @iot_dataa.status = 'YTS'
         @iot_dataa.save!
       else
         redirect_to root_url, notice: 'Process Completed'
@@ -49,9 +49,16 @@ class IotDataController < ApplicationController
   def show
   end
 
-  def seq_data_entry
-    @iot_datum = IotDatum.new(iot_datum_params)
-    @iot_datum.save!
+  def seq_data_entry(data)
+    # puts data.inspect
+    @tracker = Tracker.new
+    @tracker.wb_id = data.workbench_number
+    @tracker.part_code = data.part_number
+    @tracker.employee_id = data.employee_id
+    @tracker.shift = data.shift
+    @tracker.device_id = data.device_id
+    @tracker.count = data.count
+    @tracker.save!
   end
 
   def process_start

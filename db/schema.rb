@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180821110313) do
+ActiveRecord::Schema.define(version: 20180829092802) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token", limit: 255
@@ -24,6 +24,12 @@ ActiveRecord::Schema.define(version: 20180821110313) do
 
   add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true, using: :btree
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
+
+  create_table "charts", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "iot_data", force: :cascade do |t|
     t.integer  "workbench_number", limit: 4
@@ -53,6 +59,17 @@ ActiveRecord::Schema.define(version: 20180821110313) do
     t.integer  "kind",        limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "trackers", force: :cascade do |t|
+    t.integer  "wb_id",       limit: 4
+    t.string   "part_code",   limit: 255
+    t.integer  "employee_id", limit: 4
+    t.integer  "shift",       limit: 4
+    t.integer  "device_id",   limit: 4
+    t.integer  "count",       limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|
