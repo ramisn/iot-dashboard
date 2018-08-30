@@ -10,7 +10,10 @@ class ImportController < ApplicationController
 	end
 
 	def import
-	    IotDatum.import(params[:file])
-	    redirect_to root_url, notice: 'Data imported.'
+	    if IotDatum.import(params[:file])
+	    		redirect_to root_url, notice: 'Data imported.'
+	    else
+	    		redirect_to import_index_path, notice: 'Part Code Already Assigned for a Device'
+	    end
 	end
 end

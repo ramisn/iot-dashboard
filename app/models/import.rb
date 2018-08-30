@@ -1,7 +1,9 @@
 require 'csv'
 
-class Measure < ActiveRecord::Base
+class Import < ActiveRecord::Base
   belongs_to :IotDatum
+
+  validates_uniqueness_of :part_number, :message => "^Friendly field name is blank Import"
 
 	def self.import(file)
     spreadsheet = Roo::Spreadsheet.open(file.path)

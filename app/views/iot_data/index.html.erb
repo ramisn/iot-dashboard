@@ -39,9 +39,9 @@
         <td><%= iot_datum.status %></td>
         <td class="action-buttons">
           <% if iot_datum.status == 'Processing' || iot_datum.status == 'YTS' %>
-          <%= link_to 'Start Process', iot_datum_process_start_path(iot_datum), class: 'btn btn-success'%>
+          <%= link_to 'Start', iot_datum_process_start_path(iot_datum), class: 'btn btn-primary' %>
           <% elsif iot_datum.status == 'Process Completed' %>  
-          <%= link_to 'Process Completed', '', class: 'btn btn-danger' %>
+          <%= link_to 'Completed', '', class: 'btn btn-success' %>
           <% end %>        
           <%#= link_to 'Edit', edit_iot_datum_path(iot_datum), class: 'btn btn-primary' %>
           <%#= link_to 'Destroy', iot_datum, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
@@ -65,9 +65,35 @@
     //     });
     // }
     $(document).ready(function() {
-      $('#iottt').DataTable({ responsive: true });
+      $('#iottt').DataTable({ responsive: true, ordering: false });
       setInterval('window.location.reload()', 10000);
       // window.setInterval('update()', 3*1000);
+    //   var table = $('#iottt').DataTable({ responsive: true, ordering: false });
+ 
+    // table.columns().flatten().each( function ( colIdx ) {
+    // // Create the select list and search operation
+    // var select = $('<select />')
+    //     .appendTo(
+    //         table.column(colIdx).footer()
+    //     )
+    //     .on( 'change', function () {
+    //         table
+    //             .column( colIdx )
+    //             .search( $(this).val() )
+    //             .draw();
+    //     } );
+ 
+    // // Get the search data for the first column and add to the select list
+    // table
+    //     .column( colIdx )
+    //     .cache( 'search' )
+    //     .sort()
+    //     .unique()
+    //     .each( function ( d ) {
+    //         select.append( $('<option value="'+d+'">'+d+'</option>') );
+    //     } );
+    //   } );
+    // setInterval('window.location.reload()', 10000);
     });
   </script>
 <% end %>
