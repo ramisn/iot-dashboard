@@ -58,6 +58,7 @@ GEM
       jquery-rails
     builder (3.2.3)
     byebug (10.0.2)
+    chartkick (2.2.5)
     coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -104,6 +105,8 @@ GEM
       grape (>= 0.16.2)
     grape-swagger-rails (0.3.0)
       railties (>= 3.2.12)
+    groupdate (4.0.1)
+      activesupport (>= 4.2)
     high_voltage (3.1.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
@@ -246,12 +249,14 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap_sb_admin_base_v2
   byebug
+  chartkick (~> 2.2.0)
   coffee-rails (~> 4.1.0)
   devise
   grape
   grape-entity
   grape-swagger
   grape-swagger-rails
+  groupdate
   high_voltage
   jbuilder (~> 2.0)
   jquery-rails

@@ -17,6 +17,8 @@ gem 'thin'
 gem 'seed_dump'
 gem 'bootstrap_sb_admin_base_v2'
 gem 'roo'
+gem 'chartkick', '~> 2.2.0'
+gem 'groupdate'
 
 # API Stuff
 gem 'grape'

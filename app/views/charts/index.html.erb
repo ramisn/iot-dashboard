@@ -1,0 +1,6 @@
+<%= line_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"], legend: "bottom" %>
+<%= line_chart Tracker.group_by_week(:created_at).count, colors: ["#b00", "#666"], legend: "bottom" %>
+<%= line_chart Tracker.group_by_month(:created_at).count, colors: ["#b00", "#666"], legend: "bottom" %>
+<%= bar_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"], prefix: "$" %>
+<%= pie_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
+<%= column_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
