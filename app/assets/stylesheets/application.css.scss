@@ -16,6 +16,7 @@
  *= require_self
  */
 
+ 
 .login-panel {
   margin-top: 12px;
 }
@@ -27,4 +28,24 @@
 table.dataTable thead > tr > th {
   padding-left: 0px !important;
   padding-right: 0px !important;
+}
+
+/*
+.green {
+    color: white;
+    background: green;
+}
+
+.yellow {
+    color: yellow;
+    background: yellow;
+}
+
+.red {
+    color: white;
+    background: #1598a9;
+} */
+
+#ct {
+font-weight: bold;
 }

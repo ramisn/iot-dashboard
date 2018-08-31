@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180829092802) do
+ActiveRecord::Schema.define(version: 20180831055351) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token", limit: 255
@@ -53,12 +53,32 @@ ActiveRecord::Schema.define(version: 20180829092802) do
     t.integer  "sensor_id",  limit: 4
   end
 
+  create_table "part_masters", force: :cascade do |t|
+    t.string   "part_code",           limit: 255
+    t.string   "part_description",    limit: 255
+    t.string   "IDE_type",            limit: 255
+    t.decimal  "no_of_units_per_IDE",             precision: 10
+    t.decimal  "UOM",                             precision: 10
+    t.decimal  "weight_per_piece",                precision: 10
+    t.integer  "lot_size",            limit: 4
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
   create_table "sensors", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.text     "description", limit: 65535
     t.integer  "kind",        limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "shift_masters", force: :cascade do |t|
+    t.string   "shift",      limit: 255
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "trackers", force: :cascade do |t|
@@ -90,5 +110,14 @@ ActiveRecord::Schema.define(version: 20180829092802) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "workbench_masters", force: :cascade do |t|
+    t.integer  "machine_ID",         limit: 4
+    t.string   "machine_name",       limit: 255
+    t.integer  "machine_throughput", limit: 4
+    t.string   "machine_status",     limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
 end
