@@ -39,7 +39,7 @@ class IotDataController < ApplicationController
       if count.to_i == @iot_dataa.target
         @iot_dataa.status = 'Process Completed'
         @iot_dataa.save!
-        process_start(@iot_dataa) 
+        # process_start(@iot_dataa) 
       end
     end 
 
@@ -63,22 +63,20 @@ class IotDataController < ApplicationController
     @tracker.save!
   end
 
-  def process_start(seq_data='')
+  def process_start
 
       id = params[:iot_datum_id]
-      puts "-----#{id}---with id----"
-      if id
-        @iot_data = IotDatum.find_by(id: id) 
+        @iot_data = IotDatum.find_by(id: id) if id
         @iot_data.status = 'Processing'
         @iot_data.save!
-      else
-        puts "-----#{seq_data.id}---seq id----"
-        @seq = seq_data.id + 1
-        puts @seq
-        @iot_data = IotDatum.find_by(id: @seq) 
-        @iot_data.status = 'Processing'
-        @iot_data.save!
-      end
+      # else
+      #   puts "-----#{seq_data.id}---seq id----"
+      #   @seq = seq_data.id + 1
+      #   puts @seq
+      #   @iot_data = IotDatum.find_by(id: @seq) 
+      #   @iot_data.status = 'Processing'
+      #   @iot_data.save!
+      # end
 
       # device_id = @iot_data.device_id
       # part_no = @iot_data.part_number
