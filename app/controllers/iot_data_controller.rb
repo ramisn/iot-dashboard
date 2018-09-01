@@ -63,7 +63,7 @@ class IotDataController < ApplicationController
     @tracker.save!
   end
 
-  def process_start(seq_data=nil)
+  def process_start(seq_data='')
 
       id = params[:iot_datum_id]
       puts "-----#{id}---with id----"
