@@ -66,9 +66,13 @@ class IotDataController < ApplicationController
   def process_start
 
       id = params[:iot_datum_id]
-        @iot_data = IotDatum.find_by(id: id) if id
-        @iot_data.status = 'Processing'
-        @iot_data.save!
+        # @iot_data = IotDatum.find_by(id: id) if id
+        @iot_data = IotDatum.where("status = ?", 'YTS');
+        puts @iot_data.count
+        @iot_data.each { |d| d.status = 'Processing'; d.save!} 
+       
+        # @iot_data.status = 'Processing'
+        # @iot_data.save!
       # else
       #   puts "-----#{seq_data.id}---seq id----"
       #   @seq = seq_data.id + 1

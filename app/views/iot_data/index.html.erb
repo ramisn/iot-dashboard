@@ -27,9 +27,9 @@
   <tbody>
     <% @iot_data.each do |iot_datum| %>
       <% if iot_datum.status == 'Process Completed' %>
+        <tr class="greenn">
+        <% elsif iot_datum.status == 'Processing' && iot_datum.count > 0 %>
         <tr class="green">
-        <% elsif iot_datum.status == 'Processing' %>
-        <tr class="yellow">
         <% elsif iot_datum.status == 'YTS' %>
         <tr class="red">
         <% else %>
@@ -65,7 +65,9 @@
           <%#= link_to 'Destroy', iot_datum, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </td>
       </tr>
+      
     <% end %>
+    <!-- Total <%#= @iot_data.count %> Parts are Processing -->
   </tbody>
 </table>
 
@@ -84,7 +86,7 @@
     // }
     $(document).ready(function() {
       $('#iottt').DataTable({ responsive: true, ordering: false });
-      setInterval('window.location.reload()', 2000);
+      setInterval('window.location.reload()', 5000);
       // window.setInterval('update()', 3*1000);
     //   var table = $('#iottt').DataTable({ responsive: true, ordering: false });
  
