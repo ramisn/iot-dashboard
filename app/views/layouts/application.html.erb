@@ -5,8 +5,9 @@
   <title>
     <%= content_for?(:title) ? yield(:title) : "Intelligent Counting System" %>
   </title>
-  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Intelligent Counting System" %>">
   <%= image_tag 'http://tvsrubber.com/wp-content/uploads/2017/08/group-info-logistics.jpg', class: "img-responsive center-block", :alt => "avatar" %>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Intelligent Counting System" %>">
+
   <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
   <%= javascript_include_tag 'application', "chartkick" %>
   <%#= javascript_include_tag 'jquery.min', 'moment.min', 'Chart.min', 'chartkick' %>

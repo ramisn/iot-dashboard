@@ -13,7 +13,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'high_voltage'
 gem 'mysql2', '~> 0.3.18'
-gem 'thin'
+
 gem 'puma', '~> 3.7'
 gem 'seed_dump'
 gem 'bootstrap_sb_admin_base_v2'
@@ -40,6 +40,7 @@ group :development do
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'thin'
 end
 
 group :production do
