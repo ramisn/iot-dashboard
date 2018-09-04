@@ -12,8 +12,8 @@ class IotDataController < ApplicationController
     
       @iot_data = IotDatum.where("device_id = ? and count = ? and part_number = ?", params[:device_id],params[:count], params[:part_number]) if device_id && count && part
       
-      if params[:status]
-        @iot_datas = IotDatum.where("status = ?", 'Processing') 
+      if params[:status] && params[:device_id]
+        @iot_datas = IotDatum.where("status = ? and device_id = ?", 'Processing', params[:device_id]) 
         render json: @iot_datas
       end
       
