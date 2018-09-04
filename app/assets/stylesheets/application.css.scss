@@ -37,6 +37,10 @@ table.dataTable thead > tr > th {
     /*background: green;*/
 }
 
+input[type="file"] {
+    display: inline-block;
+}
+
 /*
 .yellow {
     color: yellow;

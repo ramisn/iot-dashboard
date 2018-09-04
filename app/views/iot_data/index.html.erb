@@ -5,6 +5,9 @@
 <p id="notice"><%= notice %></p>
 
 <!-- <h1>Listing Iot Data</h1> -->
+<%= form_for import_import_index_path, multipart: true do |f| %>
+<%= f.check_box :manual, :text => 'Manual' %>
+<% end %>
 
 <table id="iottt" class="display table" cellspacing="0" width="95%">
   <thead>
@@ -16,7 +19,7 @@
       <th>Part No</th>
       <th>Target</th>
       <th>Lot size</th>
-      <th>Device</th>
+      <!-- <th>Device</th> -->
       <th>Count</th>
       <!-- <th>Status</th> -->
       <th>Actions</th>
@@ -42,7 +45,7 @@
         <td><%= iot_datum.part_number %></td>
         <td><%= iot_datum.target %></td>
         <td><%= iot_datum.lot_size %></td>
-        <td><%= iot_datum.device_id %></td>
+        <!-- <td><%#= iot_datum.device_id %></td> -->
         <td id="ct"><%= iot_datum.count %></td>
         <!-- <td><%#= iot_datum.status %></td> -->
         <td class="action-buttons">
@@ -86,7 +89,7 @@
     // }
     $(document).ready(function() {
       $('#iottt').DataTable({ responsive: true, ordering: false });
-      setInterval('window.location.reload()', 5000);
+      // setInterval('window.location.reload()', 5000);
       // window.setInterval('update()', 3*1000);
     //   var table = $('#iottt').DataTable({ responsive: true, ordering: false });
  

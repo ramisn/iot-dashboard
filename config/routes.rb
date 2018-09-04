@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   resources :charts
   resources :trackers
   resources :import  do
+    # post 'parts' => 'import#parts'
     collection do
       post :import
+      post :parts
     end
   end
   resources :iot_data do
@@ -25,8 +27,8 @@ Rails.application.routes.draw do
   
   resources :users, only: [:show]
   
-  # mount SensorsAdminPanel::V1 => '/'
-  # mount GrapeSwaggerRails::Engine, at: "/documentation"
+  mount SensorsAdminPanel::V1 => '/'
+  mount GrapeSwaggerRails::Engine, at: "/documentation"
 
   # root to: 'visitors#index'
   root to: 'iot_data#index'
