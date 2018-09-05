@@ -20,7 +20,6 @@ class IotDataController < ApplicationController
     if device_id != nil && part != nil
       @iot_dataa = IotDatum.find_by(device_id: device_id, part_number: part) 
       target = @iot_dataa.target if @iot_dataa
-      puts @iot_dataa.inspect
       if (count.to_i <= target.to_i ) && (@iot_dataa.status = 'Processing')
         @iot_dataa.device_id = device_id
         @iot_dataa.count = count
@@ -51,7 +50,6 @@ class IotDataController < ApplicationController
   end
 
   def seq_data_entry(data)
-    puts data.inspect
     @tracker = Tracker.new
     @tracker.wb_id = data.workbench_number
     @tracker.part_code = data.part_number
