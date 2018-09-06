@@ -1,5 +1,6 @@
 require 'csv'
 class WorkbenchMaster < ActiveRecord::Base
+	belongs_to :IotDatum
 	def self.import(file)
     spreadsheet = Roo::Spreadsheet.open(file.path)
     header = spreadsheet.row(1)
