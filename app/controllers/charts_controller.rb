@@ -5,6 +5,35 @@ class ChartsController < ApplicationController
   # GET /charts.json
   def index
     @charts = Chart.all
+    @iot_data_for_1 = IotDatum.where("status = ? and count > ? and device_id = ?", 'Processing', 0, 1)
+    @iot_data_for_2 = IotDatum.where("status = ? and count > ? and device_id = ?", 'Processing', 0, 2)
+    
+    @data_for_1 = []
+    @data_for_2 = []
+    @iot_data_for_1.each do |d|
+      @data_for_1 << d.count
+      @data_for_1 << d.target
+      @data_for_1 << d.device_id
+    end
+    @iot_data_for_2.each do |f|
+      @data_for_2 << f.count
+      @data_for_2 << f.target
+      @data_for_2 << f.device_id
+    end
+
+    @trackers_data_1 = Tracker.where("device_id = ?",1)
+    @tracker_data_for_one = []
+    @trackers_data_1.each do |one|
+      @tracker_data_for_one << one.count
+    end
+    @trackers_data_2 = Tracker.where("device_id = ?",2)
+    @tracker_data_for_two = []
+    @trackers_data_1.each do |two|
+      @tracker_data_for_two << two.count
+    end
+
+    @percentage = ((70.to_f/80.to_f) * 100)
+    puts @percentage
   end
 
   # GET /charts/1

@@ -5,11 +5,16 @@
   <title>
     <%= content_for?(:title) ? yield(:title) : "Intelligent Counting System" %>
   </title>
-  <%= image_tag 'http://tvsrubber.com/wp-content/uploads/2017/08/group-info-logistics.jpg', class: "img-responsive center-block", :alt => "avatar" %>
+  <%#= image_tag 'http://tvsrubber.com/wp-content/uploads/2017/08/group-info-logistics.jpg', class: "img-responsive center-block", :alt => "avatar" %>
+  
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Intelligent Counting System" %>">
 
   <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
   <%= javascript_include_tag 'application', "chartkick" %>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
   <%#= javascript_include_tag 'jquery.min', 'moment.min', 'Chart.min', 'chartkick' %>
   <%#= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>

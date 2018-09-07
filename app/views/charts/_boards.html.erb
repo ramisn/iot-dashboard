@@ -1,0 +1,102 @@
+<style type="text/css">
+  .col-lg-3 {
+    width: 33%;
+    font-size: 50px;
+}
+
+
+</style>
+<!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <!-- <i class="fa fa-eye fa-5x"></i> -->
+                                    <!-- <i class="fa fa-thermometer fa-5x"></i>
+                                    <i class="fa fa-chip fa-5x"></i> -->
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">80<%#= @active_devices.count %></div>
+                                    <div>Actual</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a> -->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <!-- <i class="fa fa-check fa-5x"></i> -->
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">70<%#= @completed_parts.count %></div>
+                                    <div>Acheived</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a> -->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <!-- <i class="fa fa-refresh fa-5x"></i> -->
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><%= @percentage %></div>
+                                    <div>% </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a> -->
+                    </div>
+                </div>
+                <!-- <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-eye-slash fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><%#= @inactive_devices.count %></div>
+                                    <div>Inactive Devices</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div> -->
+            </div>
+

@@ -1,10 +1,190 @@
 
-<%= line_chart Tracker.group(:employee_id).group_by_day(:created_at).count %>
+
 <%#= line_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"], legend: "bottom" %>
-<%= bar_chart Tracker.group(:part_code).group_by_day(:created_at).count, min: 0, max: 150 %>
+
 <%#= line_chart Tracker.group_by_week(:created_at).count, colors: ["#b00", "#666"], legend: "bottom" %>
 <%#= line_chart Tracker.group_by_month(:created_at).count, colors: ["#b00", "#666"], legend: "bottom" %>
 <%#= bar_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"], prefix: "$" %>
 <%#= pie_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
 <%#= column_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
+<%= render 'boards' %>
+<div style="width: 600px; height: 400px; margin: 0 auto">
+    <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
+    <div id="container-rpm" style="width: 300px; height: 200px; float: left"></div>
+    <!-- <div id="container-rpm1" style="width: 300px; height: 200px; float: left"></div> -->
+</div>
 
+<%= line_chart Tracker.group(:employee_id).group_by_day(:created_at).count %>
+<%= bar_chart Tracker.group(:part_code).group_by_week(:created_at).count, min: 0, max: 150 %>
+<%= line_chart Tracker.group(:part_code).group_by_day(:created_at).count %>
+
+<script type="text/javascript">
+  var gaugeOptions = {
+
+    chart: {
+        type: 'solidgauge'
+    },
+
+    title: 'WorkBench',
+
+    pane: {
+        center: ['50%', '85%'],
+        size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+            innerRadius: '60%',
+            outerRadius: '100%',
+            shape: 'arc'
+        }
+    },
+
+    tooltip: {
+        enabled: false
+    },
+
+    // the value axis
+    yAxis: {
+        stops: [
+            [0.1, '#55BF3B'], // green
+            [0.5, '#DDDF0D'], // yellow
+            [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 15
+        }
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
+            }
+        }
+    }
+};
+
+// The speed gauge
+var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {
+    yAxis: {
+        min: 0,
+        max: '<%= @data_for_1[1] %>',
+        title: {
+            text: 'WorkBench No. 1'
+        }
+    },
+
+    credits: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Speed',
+        data: [<%= @data_for_1[0] %>],
+        dataLabels: {
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                   '<span style="font-size:12px;color:silver">No. of Parts</span></div>'
+        },
+        tooltip: {
+            valueSuffix: 'No. of Parts'
+        }
+    }]
+
+}));
+
+// The RPM gauge
+var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
+    yAxis: {
+        min: 0,
+        max: '<%= @data_for_2[1] %>',
+        title: {
+            text: 'WorkBench No. 2'
+        }
+    },
+
+    series: [{
+        name: 'RPM',
+        data: [<%= @data_for_2[0] %>] || [0],
+        dataLabels: {
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                   '<span style="font-size:12px;color:silver">No. of Parts</span></div>'
+        },
+        tooltip: {
+            valueSuffix: ' revolutions/min'
+        }
+    }]
+
+}));
+
+// The RPM gauge
+var chartRpm1 = Highcharts.chart('container-rpm1', Highcharts.merge(gaugeOptions, {
+    yAxis: {
+        min: 0,
+        max: '<%= @data_for_1[1] %>',
+        title: {
+            text: 'WorkBench No. 3'
+        }
+    },
+
+    series: [{
+        name: 'RPM',
+        data: [<%= @data_for_1[0] %>],
+        dataLabels: {
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                   '<span style="font-size:12px;color:silver">No. of Parts</span></div>'
+        },
+        tooltip: {
+            valueSuffix: ' revolutions/min'
+        }
+    }]
+
+}));
+
+// Bring life to the dials
+// setInterval(function () {
+//     // Speed
+//     var point,
+//         newVal,
+//         inc;
+
+//     if (chartSpeed) {
+//         point = chartSpeed.series[0].points[0];
+//         inc = Math.round((Math.random() - 0.5) * 100);
+//         newVal = point.y + inc;
+
+//         if (newVal < 0 || newVal > 200) {
+//             newVal = point.y - inc;
+//         }
+
+//         point.update(newVal);
+//     }
+
+//     // RPM
+//     if (chartRpm) {
+//         point = chartRpm.series[0].points[0];
+//         inc = Math.random() - 0.5;
+//         newVal = point.y + inc;
+
+//         if (newVal < 0 || newVal > 5) {
+//             newVal = point.y - inc;
+//         }
+
+//         point.update(newVal);
+//     }
+// }, 2000);
+
+
+
+</script>
