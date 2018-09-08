@@ -5,7 +5,7 @@
   <title>
     <%= content_for?(:title) ? yield(:title) : "Intelligent Counting System" %>
   </title>
-  <%#= image_tag 'http://tvsrubber.com/wp-content/uploads/2017/08/group-info-logistics.jpg', class: "img-responsive center-block", :alt => "avatar" %>
+  <%#= image_tag 'tvslsl_logo4.jpg', class: "img-responsive center-block", :alt => "avatar" %>
   
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Intelligent Counting System" %>">
 
@@ -24,6 +24,7 @@
 <body>
   <div id="wrapper" class="">
     <%= render 'layouts/navbar' %>
+    <%#= render 'layouts/nav_links_for_auth' %>
   </div>
 
   <div id="page-wrapper">
@@ -32,7 +33,7 @@
     <%= render 'layouts/messages' %>
 
     <div>
-      <div class="panel panel-default">
+      <div class="panel panel-info">
         <div class="panel-heading">
           <%= content_for?(:panel_heading) ? yield(:panel_heading) : "Dashboard" %>
         </div>
