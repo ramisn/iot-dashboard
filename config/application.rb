@@ -33,6 +33,16 @@ module SensorsAdminPanel
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
 
+    # config.middleware.insert_before 0, Rack::Cors do
+    #     allow do
+    #         origins '*'
+    #         resource '*',
+    #           :headers => :any,
+    #           :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+    #           :methods => [:get, :post, :delete, :patch, :options]
+    #     end
+    # end
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
   end

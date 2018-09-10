@@ -1,4 +1,6 @@
 class IotDataController < ApplicationController
+  # before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!
   # protect_from_forgery with: :null_session
   before_action :set_iot_datum, only: [:show, :edit, :update, :destroy]
 

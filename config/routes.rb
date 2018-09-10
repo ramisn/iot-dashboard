@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :sensors
+  # resources :sensors
   devise_for :users, only: :session, path: 'session',
              path_names: { sign_in: 'login', sign_out: 'logout' }
   
@@ -30,6 +30,6 @@ Rails.application.routes.draw do
   # mount SensorsAdminPanel::V1 => '/'
   # mount GrapeSwaggerRails::Engine, at: "/documentation"
 
-  # root to: 'visitors#index'
-  root to: 'iot_data#index'
+  root to: 'visitors#index'
+  # root to: 'iot_data#index'
 end
