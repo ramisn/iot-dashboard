@@ -4,7 +4,7 @@
 <% content_for :panel_heading do %>Workbench Planner<% end %>
 <p id="notice"><%= notice %></p>
 
-<%= render 'layouts/boards' %>
+<%#= render 'layouts/boards' %>
 <table id="iottt" class="display table" cellspacing="0" width="95%">
   <thead>
     <tr>
@@ -85,7 +85,7 @@
     // }
     $(document).ready(function() {
       $('#iottt').DataTable({ responsive: true, ordering: true });
-      // setInterval('window.location.reload()', 4000);
+      setInterval('window.location.reload()', 4000);
       // window.setInterval('update()', 3*1000);
     //   var table = $('#iottt').DataTable({ responsive: true, ordering: false });
  

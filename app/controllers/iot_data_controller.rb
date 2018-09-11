@@ -12,10 +12,10 @@ class IotDataController < ApplicationController
     count = params[:count] if params[:count]
     part = params[:part_number] if params[:part_number]
 
-    @active_devices = WorkbenchMaster.where("machine_status = ?", 'A')
-    @inactive_devices = WorkbenchMaster.where("machine_status = ?", 'IA')
-    @completed_parts = IotDatum.where("status = ?", 'Process Completed')
-    @processing_parts = IotDatum.where("status = ?", 'Processing')
+    # @active_devices = WorkbenchMaster.where("machine_status = ?", 'A')
+    # @inactive_devices = WorkbenchMaster.where("machine_status = ?", 'IA')
+    # @completed_parts = IotDatum.where("status = ?", 'Process Completed')
+    # @processing_parts = IotDatum.where("status = ?", 'Processing')
 
     
       @iot_data = IotDatum.where("device_id = ? and count = ? and part_number = ?", params[:device_id],params[:count], params[:part_number]) if device_id && count && part
