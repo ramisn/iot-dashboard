@@ -122,12 +122,12 @@ class IotDataController < ApplicationController
       #   format.json { render :json, status: :created, location: @iot_data }
       # end
     # @iot_data = IotDatum.where("device_id = ? and count = ?", params[:device_id],params[:count]) if device_id && count
-      redirect_to root_url, notice: 'Process Started'
+      redirect_to iot_data_path, notice: 'Process Started'
   end
 
   def import
     IotDatum.import(params[:file])
-    redirect_to root_url, notice: 'Data imported.'
+    redirect_to iot_data_path, notice: 'Data imported.'
   end
 
   # GET /iot_data/new

@@ -6,7 +6,26 @@
 
 <%= render 'layouts/boards' %>
 
-
+<div class="timer" style="float: right;width: 495px;">
+  <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3" style="text-align: right;">
+            <i class="fa fa-clock-o fa-3x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            
+            <div class="huge" style="font-size: 30px;">
+              <div id="ruby_time" style="float: right;font-weight: bold;">
+                <%= (Time.now).strftime("%d-%m-%Y %I:%M:%S %p") %>
+              </div>
+            </div>
+            <!-- <div>Actual</div> -->
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
 <!-- /.col-lg-6 -->
 <div class="col-lg-6" style="width: 100%;">
     <div class="panel panel-default">
@@ -23,8 +42,9 @@
                 </li>
                 <li class="btn btn-outline btn-success" style="margin-right: 25px;"><a href="#messages-pills" data-toggle="tab">Completed Parts</a>
                 </li>
-                <!-- <li><a href="#settings-pills" data-toggle="tab">Settings</a> -->
-                </li>
+                <!-- <li class="btn btn-outline btn-primary"><a href="#settings-pills" data-toggle="tab"><%#= (Time.now).strftime("%d-%m-%Y %I:%M:%S %p") %></a>
+                  
+                </li> -->
             </ul>
 
             <!-- Tab panes -->
@@ -252,7 +272,7 @@
           </div>
                                 <div class="tab-pane fade" id="settings-pills">
                                     <!-- <h4>Settings Tab</h4> -->
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -274,12 +294,15 @@
       
       setInterval( function () {
         $("#iottt_1").load(location.href + " #iottt_1");
-        // $("#iottt").load(location.href);
-        console.log('reloaded'); 
-        // console.log(document.URL +  ' #iottt');
-        // console.log(location.href +  ' #iottt');
+        $("#ruby_time").load(location.href + " #ruby_time");
+        // console.log('reloaded'); 
+        
       }, 5000 ); // load table in every sec
       
+      setInterval( function () {
+        $("#ruby_time").load(location.href + " #ruby_time");
+        // console.log('reloaded'); 
+      }, 1000 );
     });
   </script>
 <% end %>
