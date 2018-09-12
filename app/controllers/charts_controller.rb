@@ -34,6 +34,27 @@ class ChartsController < ApplicationController
 
     @percentage = ((70.to_f/80.to_f) * 100)
     puts @percentage
+    @target = @target.to_f
+    @count_actual = @count_actual.to_f
+    # @target_all = IotDatum.select('iot_data.*, sum(target)').group('iot_data.id')
+    @target_all = IotDatum.all
+    @target_all.each {|t| @target += t.target; @count_actual += t.count}
+    puts @target
+    puts @count_actual
+
+    @percentage = ((@count_actual/@target) * 100)
+    puts @percentage.to_f
+    # @count_actual = ''
+    # # @count_actual_all = IotDatum.select('iot_data.*, sum(count)').group('iot_data.id')
+    # puts @target.inspect
+    # puts @count_actual.inspect
+    # @active_devices = WorkbenchMaster.where("machine_status = ?", 'A')
+    # @inactive_devices = WorkbenchMaster.where("machine_status = ?", 'IA')
+    # @completed_parts = IotDatum.where("status = ?", 'Process Completed')
+    # @processing_parts = IotDatum.where("status = ?", 'Processing')
+
+    # puts @active_devices
+
   end
 
   # GET /charts/1

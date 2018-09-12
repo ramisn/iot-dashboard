@@ -25,7 +25,7 @@ class ImportController < ApplicationController
 		case params[:select]
 		when 'Planner'
 	    if IotDatum.import(params[:file])
-	    		redirect_to root_url, notice: 'Data imported.'
+	    		redirect_to iot_data_path, notice: 'Data imported.'
 	    else
 	    		redirect_to import_index_path, notice: 'Part Code Already Assigned for a Device'
 	    end

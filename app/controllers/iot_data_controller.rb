@@ -7,7 +7,10 @@ class IotDataController < ApplicationController
   # GET /iot_data
   # GET /iot_data.json
   def index
-    @iot_data = IotDatum.all
+    # @iot_data = IotDatum.all
+    # @iot_data_yts = IotDatum.where("status = ?", 'YTS')
+    # @iot_data_pro = IotDatum.where("status = ?", 'Processing')
+    # @iot_data_comp = IotDatum.where("status = ?", 'Process Completed')
     device_id = params[:device_id] if params[:device_id]
     count = params[:count] if params[:count]
     part = params[:part_number] if params[:part_number]
@@ -49,6 +52,15 @@ class IotDataController < ApplicationController
         # process_start(@iot_dataa) 
       end
     end 
+
+    @iot_data_yts = IotDatum.where("status = ?", 'YTS')
+    @iot_data_pro = IotDatum.where("status = ?", 'Processing')
+    @iot_data_comp = IotDatum.where("status = ?", 'Process Completed')
+
+    @active_devices = WorkbenchMaster.where("machine_status = ?", 'A')
+    @inactive_devices = WorkbenchMaster.where("machine_status = ?", 'IA')
+    @completed_parts = IotDatum.where("status = ?", 'Process Completed')
+    @processing_parts = IotDatum.where("status = ?", 'Processing')
 
   end
 
