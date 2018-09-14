@@ -33,17 +33,31 @@ class ChartsController < ApplicationController
     end
 
     @percentage = ((70.to_f/80.to_f) * 100)
-    puts @percentage
+    # puts @percentage
     @target = @target.to_f
     @count_actual = @count_actual.to_f
     # @target_all = IotDatum.select('iot_data.*, sum(target)').group('iot_data.id')
     @target_all = IotDatum.all
     @target_all.each {|t| @target += t.target; @count_actual += t.count}
-    puts @target
-    puts @count_actual
+    # puts @target
+    # puts @count_actual
 
     @percentage = ((@count_actual/@target) * 100)
-    puts @percentage.to_f
+    # puts @percentage.to_f
+
+    @day_wise = IotDatum.select('created_at as dates, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('DAYNAME(created_at)')
+    @weekly = IotDatum.select('WEEK(created_at) as week_no, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('WEEK(created_at),DAYNAME(created_at)')
+    @monthly = IotDatum.select('MONTHNAME(created_at) as month_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('MONTHNAME(created_at)')
+    @yearly = IotDatum.select('YEAR(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('YEAR(created_at)')
+    
+    # @data = @day_wise.each do |value|
+    #   [
+    #     { name: "Available", data: [value.dates] },
+    #     { name: "Workload", data: [[value.target,value.actual]] }
+    #   ]
+    # end
+
+    # @data = [{name: "Workload", data: IotDatum.select('created_at as dates, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('DAYNAME(created_at)')}]
     # @count_actual = ''
     # # @count_actual_all = IotDatum.select('iot_data.*, sum(count)').group('iot_data.id')
     # puts @target.inspect

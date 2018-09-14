@@ -1,0 +1,187 @@
+<div class="timer" style="float: right;width: 495px;">
+  <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3" style="text-align: right;">
+            <i class="fa fa-clock-o fa-3x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            
+            <div class="huge" style="font-size: 30px;">
+              <div id="ruby_time" style="float: right;font-weight: bold;">
+                <%= (Time.zone.now).strftime("%d-%m-%Y %I:%M:%S %p") %>
+              </div>
+            </div>
+            <!-- <div>Actual</div> -->
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<!--/.col-lg-6 -->
+                <div class="col-lg-6" style="width: 101%;">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Summary
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-pills">
+                                <li class="active"><a href="#home-pills" data-toggle="tab">Day-wise</a>
+                                </li>
+                                <li><a href="#settings-pills" data-toggle="tab">Weekly</a>
+                                </li>
+                                <li><a href="#profile-pills" data-toggle="tab">Monthly</a>
+                                </li>
+                                <li><a href="#messages-pills" data-toggle="tab">Yearly</a>
+                                </li>
+                                
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="home-pills">
+                                    <!-- <h4>Day Tab</h4> -->
+                                    <p>
+            <table id="day_wise" class="display table" cellspacing="0" width="95%">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Day</th>
+                  <th>Target</th>
+                  <th>Actual</th>
+                  <th>Progress %</th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                
+                <% if @day_wise %>
+                  <% @day_wise.each do |date| %>
+                  <tr>
+                    <td><%= (date.dates).strftime("%d-%m-%Y") %></td>
+                    <td><%= date.day_name %></td>
+                    <td><%= date.target %></td>
+                    <td><%= date.actual %></td>
+                    <td><%= date.progress %></td>
+                  <% end %>
+                  </tr> 
+                <% end %>
+                
+              </tbody>
+            </table>
+
+            <br>
+            </p>
+        </div>
+                                <div class="tab-pane fade" id="profile-pills">
+                                    <!-- <h4>Profile Tab</h4> -->
+                                    <p>
+                                      <table id="day_wise" class="display table" cellspacing="0" width="95%">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Target</th>
+                  <th>Actual</th>
+                  <th>Progress % </th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                
+                <% if @monthly %>
+                  <% @monthly.each do |date| %>
+                  <tr>
+                    <td><%= date.month_name %></td>
+                    <td><%= date.target %></td>
+                    <td><%= date.actual %></td>
+                    <td><%= number_with_precision(date.progress) %></td>
+                  <% end %>
+                  </tr> 
+                <% end %>
+                
+              </tbody>
+            </table>
+
+            <br>
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="messages-pills">
+                                    <!-- <h4>Messages Tab</h4> -->
+                                    <p>
+                                      <table id="day_wise" class="display table" cellspacing="0" width="95%">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Target</th>
+                  <th>Actual</th>
+                  <th>Progress %</th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                
+                <% if @yearly %>
+                  <% @yearly.each do |date| %>
+                  <tr>
+                    <td><%= date.day_name %></td>
+                    <td><%= date.target %></td>
+                    <td><%= date.actual %></td>
+                    <td><%= date.progress %></td>
+                  <% end %>
+                  </tr> 
+                <% end %>
+                
+              </tbody>
+            </table>
+
+            <br>
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="settings-pills">
+                                    <!-- <h4>Settings Tab</h4> -->
+                                  
+                                    <p>
+          <table id="day_wise" class="display table" cellspacing="0" width="95%">
+              <thead>
+                <tr>
+                  <th>Week No.</th>
+                  <th>Day</th>
+                  <th>Target</th>
+                  <th>Actual</th>
+                  <th>Progress % </th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                
+                <% if @weekly %>
+                  <% @weekly.each do |date| %>
+                  <tr>
+                    <td><%= date.week_no %></td>
+                    <td><%= date.day_name %></td>
+                    <td><%= date.target %></td>
+                    <td><%= date.actual %></td>
+                    <td><%= date.progress %></td>
+                  <% end %>
+                  </tr> 
+                <% end %>
+                
+              </tbody>
+            </table>
+
+            <br>
+                                    </p>
+                                
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6

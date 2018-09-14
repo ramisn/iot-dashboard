@@ -14,6 +14,7 @@
 <%#= pie_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
 <%#= column_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
 <%= render 'boards' %>
+<%= render 'detail_board' %>
 <!-- <div class="timer" style="float: right;width: 353px;">
   <div class="panel panel-info">
       <div class="panel-heading">
@@ -33,26 +34,7 @@
       </div>
   </div>
 </div> -->
-<div class="timer" style="float: right;width: 495px;">
-  <div class="panel panel-info">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3" style="text-align: right;">
-            <i class="fa fa-clock-o fa-3x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            
-            <div class="huge" style="font-size: 30px;">
-              <div id="ruby_time" style="float: right;font-weight: bold;">
-                <%= (Time.zone.now).strftime("%d-%m-%Y %I:%M:%S %p") %>
-              </div>
-            </div>
-            <!-- <div>Actual</div> -->
-          </div>
-        </div>
-      </div>
-  </div>
-</div>
+
 <div style="height: 400px; margin: 0 auto">
     <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
     <div id="container-rpm" style="width: 300px; height: 200px; float: left"></div>
@@ -61,11 +43,25 @@
 </div>
 
 
-<%= line_chart Tracker.group(:employee_id).group_by_day(:created_at).count %>
-<%= bar_chart Tracker.group(:part_code).group_by_week(:created_at).count, min: 0, max: 150 %>
-<%= line_chart Tracker.group(:part_code).group_by_day(:created_at).count %>
+<%#= line_chart Tracker.group(:employee_id).group_by_day(:created_at).count %>
+<%#= bar_chart Tracker.group(:part_code).group_by_week(:created_at).count, min: 0, max: 150 %>
+<%#= line_chart Tracker.group(:part_code).group_by_day(:created_at).count %>
+<%#= line_chart @data  %>
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+      $('#day_wise').DataTable({ responsive: true, ordering: true });
+      // $('#iottt_1').DataTable({ responsive: true, ordering: true });
+      // $('#iottt_2').DataTable({ responsive: true, ordering: true });
+      
+      // setInterval( function () {
+      //   $("#iottt_1").load(location.href + " #iottt_1");
+      //   $("#ruby_time").load(location.href + " #ruby_time");
+      //   // console.log('reloaded'); 
+        
+      // }, 5000 );
+    });
 
 // (function () {
 //     function checkTime(i) {

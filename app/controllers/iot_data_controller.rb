@@ -87,7 +87,7 @@ class IotDataController < ApplicationController
         @deviceId = IotDatum.find_by(id: id) if id
         deviceId = @deviceId.device_id
         @iot_data = IotDatum.where("device_id = ? and status = ?", deviceId, 'YTS');
-        puts @iot_data.count
+        # puts @iot_data.count
         @iot_data.each { |d| d.status = 'Processing'; d.save!} 
        
         # @iot_data.status = 'Processing'
