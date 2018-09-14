@@ -45,10 +45,13 @@ class ChartsController < ApplicationController
     @percentage = ((@count_actual/@target) * 100)
     # puts @percentage.to_f
 
-    @day_wise = IotDatum.select('created_at as dates, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('DAYNAME(created_at)')
-    @weekly = IotDatum.select('WEEK(created_at) as week_no, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('WEEK(created_at),DAYNAME(created_at)')
-    @monthly = IotDatum.select('MONTHNAME(created_at) as month_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('MONTHNAME(created_at)')
-    @yearly = IotDatum.select('YEAR(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('YEAR(created_at)')
+    # @day_wise = IotDatum.select('created_at as dates, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('DAYNAME(created_at)')
+    @day_wise = IotDatum.select("created_at as dates, to_char(created_at, 'day') as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress").group("to_char(created_at, 'day'),created_at")
+    # puts @day_wise.inspect
+    
+    # @weekly = IotDatum.select('WEEK(created_at) as week_no, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('WEEK(created_at),DAYNAME(created_at)')
+    # @monthly = IotDatum.select('MONTHNAME(created_at) as month_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('MONTHNAME(created_at)')
+    # @yearly = IotDatum.select('YEAR(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('YEAR(created_at)')
     
     # @data = @day_wise.each do |value|
     #   [
