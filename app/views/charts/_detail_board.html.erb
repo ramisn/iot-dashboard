@@ -128,7 +128,7 @@
                 <% if @yearly %>
                   <% @yearly.each do |date| %>
                   <tr>
-                    <td><%= date.day_name %></td>
+                    <td><%= date.year_name %></td>
                     <td><%= date.target %></td>
                     <td><%= date.actual %></td>
                     <td><%= date.progress %></td>
@@ -150,6 +150,7 @@
               <thead>
                 <tr>
                   <th>Week No.</th>
+                  <th>Date.</th>
                   <th>Day</th>
                   <th>Target</th>
                   <th>Actual</th>
@@ -164,6 +165,7 @@
                   <% @weekly.each do |date| %>
                   <tr>
                     <td><%= date.week_no %></td>
+                    <td><%= (date.dates).strftime("%d-%m-%Y") %></td>
                     <td><%= date.day_name %></td>
                     <td><%= date.target %></td>
                     <td><%= date.actual %></td>

@@ -32,7 +32,7 @@ class ChartsController < ApplicationController
       @tracker_data_for_two << two.count
     end
 
-    @percentage = ((70.to_f/80.to_f) * 100)
+    # @percentage = ((70.to_f/80.to_f) * 100)
     # puts @percentage
     @target = @target.to_f
     @count_actual = @count_actual.to_f
@@ -46,19 +46,18 @@ class ChartsController < ApplicationController
     # puts @percentage.to_f
 
     # @day_wise = IotDatum.select('created_at as dates, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('DAYNAME(created_at)')
-    @day_wise = IotDatum.select("created_at as dates, to_char(created_at, 'day') as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress").group("to_char(created_at, 'day'),created_at")
+    # @weekly = IotDatum.select('WEEK(created_at) as week_no, created_at as dates, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('WEEK(created_at)')
+    # @monthly = IotDatum.select('MONTHNAME(created_at) as month_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('MONTHNAME(created_at)')
+    # @yearly = IotDatum.select('YEAR(created_at) as year_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('YEAR(created_at)')
+    
+    # For PostgreSQL
+    @day_wise = IotDatum.select("to_char(created_at, 'DD-MM-YYYY') as dates, to_char(created_at, 'Day') as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Day'), to_char(created_at, 'DD-MM-YYYY')")
+    @weekly = IotDatum.select("extract(WEEK from created_at) as week_no, to_char(created_at, 'DD-MM-YYYY') as dates,to_char(created_at, 'Day') as day_name,sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("extract(WEEK from created_at),to_char(created_at, 'Day'),to_char(created_at, 'DD-MM-YYYY')")
+    @monthly = IotDatum.select("extract(MONTH from created_at) as month_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("extract(MONTH from created_at)")
+    @yearly = IotDatum.select("extract(YEAR from created_at) as year_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("extract(YEAR from created_at)")
+    
     # puts @day_wise.inspect
     
-    # @weekly = IotDatum.select('WEEK(created_at) as week_no, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('WEEK(created_at),DAYNAME(created_at)')
-    # @monthly = IotDatum.select('MONTHNAME(created_at) as month_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('MONTHNAME(created_at)')
-    # @yearly = IotDatum.select('YEAR(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('YEAR(created_at)')
-    
-    # @data = @day_wise.each do |value|
-    #   [
-    #     { name: "Available", data: [value.dates] },
-    #     { name: "Workload", data: [[value.target,value.actual]] }
-    #   ]
-    # end
 
     # @data = [{name: "Workload", data: IotDatum.select('created_at as dates, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('DAYNAME(created_at)')}]
     # @count_actual = ''
