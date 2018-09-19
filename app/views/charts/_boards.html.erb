@@ -16,7 +16,11 @@
                                     <i class="fa fa-chip fa-5x"></i> -->
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><%= @target.to_i %></div>
+                                    <div class="huge"><%#= @target.to_i %>
+                                      <% @yearly.each do |pr| %>
+                                        <%= pr.target %>
+                                      <% end %>
+                                    </div>
                                     <div>Target</div>
                                 </div>
                             </div>
@@ -38,7 +42,11 @@
                                     <i class="fa fa-check fa-3x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><%= @count_actual.to_i %></div>
+                                    <div class="huge"><%#= @count_actual.to_i %>
+                                      <% @yearly.each do |pr| %>
+                                        <%= pr.actual %>
+                                      <% end %>
+                                    </div>
                                     <div>Actual</div>
                                 </div>
                             </div>
@@ -60,7 +68,13 @@
                                     <i class="fa fa-chevron-up fa-3x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><%= number_with_precision(@percentage, :precision => 2) %> % </div>
+                                    <div class="huge">
+                                    <%#= number_with_precision(@percentage, :precision => 2) %> <% @yearly.each do |pr| %>
+                                     <%= pr.progress %>
+                                     <% end %>
+                                     % 
+                                    </div>
+
                                     <div>Progress</div>
                                 </div>
                             </div>

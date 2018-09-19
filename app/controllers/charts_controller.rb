@@ -34,15 +34,15 @@ class ChartsController < ApplicationController
 
     # @percentage = ((70.to_f/80.to_f) * 100)
     # puts @percentage
-    @target = @target.to_f
-    @count_actual = @count_actual.to_f
-    # @target_all = IotDatum.select('iot_data.*, sum(target)').group('iot_data.id')
-    @target_all = IotDatum.all
-    @target_all.each {|t| @target += t.target; @count_actual += t.count}
+    # @target = @target.to_f
+    # @count_actual = @count_actual.to_f
+    # # @target_all = IotDatum.select('iot_data.*, sum(target)').group('iot_data.id')
+    # @target_all = IotDatum.all
+    # @target_all.each {|t| @target += t.target; @count_actual += t.count}
     # puts @target
     # puts @count_actual
 
-    @percentage = ((@count_actual/@target) * 100)
+    # @percentage = ((@count_actual/@target) * 100)
     # # puts @percentage.to_f
     adapt = ActiveRecord::Base.connection_config
     adapt = adapt.to_a
