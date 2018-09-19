@@ -14,7 +14,9 @@
 <%#= pie_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
 <%#= column_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
 <%= render 'boards' %>
+<%#= render 'widgets' %>
 <%= render 'detail_board' %>
+
 <!-- <div class="timer" style="float: right;width: 353px;">
   <div class="panel panel-info">
       <div class="panel-heading">
@@ -87,6 +89,21 @@ $(document).ready(function() {
         console.log('reloaded'); 
         
       }, 1000 );
+
+  $(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+  if(!$this.hasClass('panel-collapsed')) {
+    $this.parents('.panel').find('.panel-body').slideUp();
+    $this.addClass('panel-collapsed');
+    $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+    
+  } else {
+    $this.parents('.panel').find('.panel-body').slideDown();
+    $this.removeClass('panel-collapsed');
+    $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+    
+  }
+})
 
   var gaugeOptions = {
 

@@ -42,7 +42,7 @@ class ChartsController < ApplicationController
     # puts @target
     # puts @count_actual
 
-    # @percentage = ((@count_actual/@target) * 100)
+    @percentage = ((@count_actual/@target) * 100)
     # # puts @percentage.to_f
     adapt = ActiveRecord::Base.connection_config
     adapt = adapt.to_a
