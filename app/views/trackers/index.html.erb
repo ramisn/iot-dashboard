@@ -1,6 +1,12 @@
 <% content_for(:page_header) do %>
   <%#= "List of IoT Data" %>
 <% end %>
+<!-- <div class="input-daterange input-group" id="datepicker">
+    <input type="text" class="input-sm form-control" name="start" />
+    <span class="input-group-addon">to</span>
+    <input type="text" class="input-sm form-control" name="end" />
+</div> -->
+<%#= render 'daterange' %>
 <% content_for :panel_heading do %>Data Summary<% end %>
 <p id="notice"><%= notice %></p>
 
@@ -46,6 +52,9 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('#iott').DataTable({ responsive: true });
+    });
+
+    $('#datepicker .input-daterange').datepicker({
     });
   </script>
 <% end %>

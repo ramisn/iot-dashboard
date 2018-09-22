@@ -3,7 +3,7 @@ class IotDatum < ActiveRecord::Base
 
 # validates_uniqueness_of :part_number
 # validates :part_number, uniqueness: {scope: :workbench_number }
-validates_uniqueness_of :part_number, scope: :workbench_number, conditions: -> { where.not(status: 'Process Completed') }
+# validates_uniqueness_of :part_number, scope: :workbench_number, conditions: -> { where.not(status: 'Process Completed') }
 # validates :part_number, uniqueness: {scope: :status }
 # validates_uniqueness_of :part_number, scope: [:device_id, :status]
 	

@@ -88,10 +88,11 @@ class IotDataController < ApplicationController
         deviceId = @deviceId.device_id
         @iot_data = IotDatum.where("device_id = ? and status = ?", deviceId, 'YTS');
         # puts @iot_data.count
-        @iot_data.each { |d| d.status = 'Processing'; d.save!} 
-       
-        # @iot_data.status = 'Processing'
-        # @iot_data.save!
+        # @iot_data.each { |d| d.status = 'Processing'; d.save!} 
+        # puts @deviceId.inspect
+        # puts @deviceId.status
+        @deviceId.status = 'Processing'
+        @deviceId.save!
       # else
       #   puts "-----#{seq_data.id}---seq id----"
       #   @seq = seq_data.id + 1
