@@ -16,4 +16,7 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap_sb_admin_base_v2
+//= require bootstrap-datepicker
+//= require moment
+//= require daterangepicker
 //= require_tree .

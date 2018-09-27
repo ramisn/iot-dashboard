@@ -62,6 +62,8 @@ class IotDataController < ApplicationController
     @completed_parts = IotDatum.where("status = ?", 'Process Completed')
     @processing_parts = IotDatum.where("status = ?", 'Processing')
 
+    @duration = Tracker.select("(max(created_at) - min(created_at)) AS duration").group("part_code")
+    
   end
 
   # GET /iot_data/1
@@ -80,6 +82,15 @@ class IotDataController < ApplicationController
     @tracker.count = data.count
     @tracker.save!
   end
+
+  # def print_pdf
+  #   id = params[:iot_datum_id]
+  #   @print_record = IotDatum.find_by(id: id) if id
+  #     respond_to do |format|
+  #       format.pdf #{ render :json, status: :created, location: @iot_data }
+  #     end
+
+  # end
 
   def process_start
 

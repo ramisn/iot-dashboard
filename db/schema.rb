@@ -13,112 +13,115 @@
 
 ActiveRecord::Schema.define(version: 20180831113423) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "api_keys", force: :cascade do |t|
-    t.string   "access_token", limit: 255
+    t.string   "access_token"
     t.datetime "expires_at"
-    t.integer  "user_id",      limit: 4
+    t.integer  "user_id"
     t.boolean  "active"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true, using: :btree
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "charts", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "iot_data", force: :cascade do |t|
-    t.integer  "workbench_number", limit: 4
-    t.string   "part_number",      limit: 255
-    t.integer  "target",           limit: 4
-    t.integer  "lot_size",         limit: 4
-    t.string   "employee_name",    limit: 255
-    t.integer  "employee_id",      limit: 4
-    t.string   "shift",            limit: 255
-    t.integer  "device_id",        limit: 4
-    t.integer  "count",            limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.string   "status",           limit: 255
+    t.integer  "workbench_number"
+    t.string   "part_number"
+    t.integer  "target"
+    t.integer  "lot_size"
+    t.string   "employee_name"
+    t.integer  "employee_id"
+    t.string   "shift"
+    t.integer  "device_id"
+    t.integer  "count"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "status"
   end
 
   create_table "measures", force: :cascade do |t|
-    t.integer  "value",      limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "sensor_id",  limit: 4
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "sensor_id"
   end
 
   create_table "part_masters", force: :cascade do |t|
-    t.string   "part_code",           limit: 255
-    t.string   "part_description",    limit: 255
-    t.string   "IDE_type",            limit: 255
-    t.decimal  "no_of_units_per_IDE",             precision: 10
-    t.decimal  "UOM",                             precision: 10
-    t.decimal  "weight_per_piece",                precision: 10
-    t.integer  "lot_size",            limit: 4
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.string   "part_code"
+    t.string   "part_description"
+    t.string   "IDE_type"
+    t.decimal  "no_of_units_per_IDE"
+    t.decimal  "UOM"
+    t.decimal  "weight_per_piece"
+    t.integer  "lot_size"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "sensors", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.text     "description", limit: 65535
-    t.integer  "kind",        limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name"
+    t.text     "description"
+    t.integer  "kind"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "shift_masters", force: :cascade do |t|
-    t.string   "shift",      limit: 255
+    t.string   "shift"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trackers", force: :cascade do |t|
-    t.integer  "wb_id",       limit: 4
-    t.string   "part_code",   limit: 255
-    t.integer  "employee_id", limit: 4
-    t.integer  "shift",       limit: 4
-    t.integer  "device_id",   limit: 4
-    t.integer  "count",       limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "target",      limit: 4
+    t.integer  "wb_id"
+    t.string   "part_code"
+    t.integer  "employee_id"
+    t.integer  "shift"
+    t.integer  "device_id"
+    t.integer  "count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "target"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "name",                   limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "workbench_masters", force: :cascade do |t|
-    t.integer  "machine_ID",         limit: 4
-    t.string   "machine_name",       limit: 255
-    t.integer  "machine_throughput", limit: 4
-    t.string   "machine_status",     limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "machine_ID"
+    t.string   "machine_name"
+    t.integer  "machine_throughput"
+    t.string   "machine_status"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end

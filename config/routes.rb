@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :charts
   resources :trackers
+
+  post 'search' => 'trackers#search'
   resources :import  do
     # post 'parts' => 'import#parts'
     collection do
@@ -13,7 +15,8 @@ Rails.application.routes.draw do
     # match '/process_start' => 'iot_data#process_start', via: :post
     # match '/request' => 'iot_data#process_start', via: :get
     # member do
-      get  :process_start
+      get :process_start
+      # get :print_pdf
     # end
     collection do
       post :import

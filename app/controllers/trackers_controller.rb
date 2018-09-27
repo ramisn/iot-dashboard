@@ -17,6 +17,16 @@ class TrackersController < ApplicationController
     @tracker = Tracker.new
   end
 
+  def search
+    puts params[:created_at]
+    puts params[:updated_at]
+    # @data = Tracker.order(:id)
+    @track_filter = Tracker.where("to_char(created_at,'yyyy-mm-dd') >= ? and to_char(created_at,'yyyy-mm-dd') <= ?", params[:created_at],params[:updated_at])
+    respond_to do |format|
+      format.csv { send_data @track_filter.to_csv }
+    end
+  end
+
   # GET /trackers/1/edit
   def edit
   end
@@ -69,6 +79,6 @@ class TrackersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tracker_params
-      params.require(:tracker).permit(:wb_id, :part_code, :employee_id, :shift, :device_id, :count)
+      params.require(:tracker).permit(:wb_id, :part_code, :employee_id, :shift, :device_id, :count, :created_at, :updated_at)
     end
 end

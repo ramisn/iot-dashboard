@@ -50,6 +50,10 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.8.0.1)
+      railties (>= 3.0)
+    bootstrap-daterangepicker-rails (3.0.3)
+      railties (>= 4.0, < 5.3)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -130,6 +134,8 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    momentjs-rails (2.20.1)
+      railties (>= 3.1)
     multi_json (1.13.1)
     mustermann (1.0.3)
     mustermann-grape (1.0.0)
@@ -138,7 +144,7 @@ GEM
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    pg (0.21.0)
+    pg (0.20.0)
     puma (3.11.2)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
@@ -247,6 +253,8 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  bootstrap-datepicker-rails
+  bootstrap-daterangepicker-rails
   bootstrap-sass
   bootstrap_sb_admin_base_v2
   byebug
@@ -262,8 +270,9 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  momentjs-rails
   mysql2 (~> 0.3.18)
-  pg (~> 0.15)
+  pg (~> 0.20.0)
   puma (~> 3.7)
   quiet_assets
   rack-contrib

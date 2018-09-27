@@ -8,15 +8,28 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+# development:
+#   adapter: mysql2
+#   encoding: utf8
+#   reconnect: false
+#   database: sensors_admin_panel
+#   pool: 5
+#   username: root
+#   password: 
+#   host: localhost
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
 development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *default
   database: sensors_admin_panel
-  pool: 5
-  username: root
-  password: 
+  username: admin
+  password:
   host: localhost
+  port: 5432  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

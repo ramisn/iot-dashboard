@@ -13,13 +13,22 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'high_voltage'
 gem 'mysql2', '~> 0.3.18'
-
+gem 'pg', '~> 0.20.0'
 gem 'puma', '~> 3.7'
 gem 'seed_dump'
 gem 'bootstrap_sb_admin_base_v2'
 gem 'roo'
 gem 'chartkick', '~> 2.2.0'
 gem 'groupdate'
+gem 'bootstrap-datepicker-rails'
+
+gem 'jquery-rails'
+gem 'momentjs-rails'
+gem 'bootstrap-daterangepicker-rails'
+# gem 'therubyracer'
+# gem 'pdfkit'
+# gem 'wkhtmltopdf-binary'
+# # gem 'wkhtmltopdf-heroku'
 
 # API Stuff
 gem 'grape'
@@ -45,5 +54,6 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'pg', '~> 0.15'
+  # gem 'pg', '~> 0.15'
+  gem 'pg', '~> 0.20.0' 
 end
