@@ -95,15 +95,32 @@ class IotDataController < ApplicationController
   def process_start
 
       id = params[:iot_datum_id]
-        @deviceId = IotDatum.find_by(id: id) if id
-        deviceId = @deviceId.device_id
+        @process_rec = IotDatum.find_by(id: id) if id
+        deviceId = @process_rec.device_id
+        part_number = @process_rec.part_number
+        
         @iot_data = IotDatum.where("device_id = ? and status = ?", deviceId, 'YTS');
         # puts @iot_data.count
         # @iot_data.each { |d| d.status = 'Processing'; d.save!} 
         # puts @deviceId.inspect
         # puts @deviceId.status
-        @deviceId.status = 'Processing'
-        @deviceId.save!
+        @uniq_data = IotDatum.where("device_id = ? and part_number = ? and status = ?", deviceId, part_number, 'Processing');
+        puts @uniq_data.count
+        if @uniq_data.count == 0
+            @process_rec.status = 'Processing'
+            @process_rec.save!
+            redirect_to iot_data_path, notice: 'Process Started'
+        else
+          @uniq_data.each do |u|
+            if u.part_number == part_number
+              redirect_to iot_data_path, alert: "Part code #{part_number} is running on device No. #{deviceId}. Please Wait to complete"
+            else
+              @process_rec.status = 'Processing'
+              @process_rec.save!
+              redirect_to iot_data_path, notice: 'Process Started'
+            end
+          end
+        end
       # else
       #   puts "-----#{seq_data.id}---seq id----"
       #   @seq = seq_data.id + 1
@@ -134,7 +151,7 @@ class IotDataController < ApplicationController
       #   format.json { render :json, status: :created, location: @iot_data }
       # end
     # @iot_data = IotDatum.where("device_id = ? and count = ?", params[:device_id],params[:count]) if device_id && count
-      redirect_to iot_data_path, notice: 'Process Started'
+      # redirect_to iot_data_path, notice: 'Process Started'
   end
 
   def import

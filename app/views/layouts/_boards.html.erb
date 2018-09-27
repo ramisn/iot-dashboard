@@ -10,7 +10,7 @@
                                     <i class="fa fa-chip fa-5x"></i> -->
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><%= @active_devices.count %></div>
+                                    <div class="huge"><%= @active_devices.count if @active_devices %></div>
                                     <div>Active Workbench</div>
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                                     <i class="fa fa-check fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><%= @completed_parts.count %></div>
+                                    <div class="huge"><%= @completed_parts.count if @completed_parts %></div>
                                     <div>Completed Parts</div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                     <i class="fa fa-refresh fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><%= @processing_parts.count %></div>
+                                    <div class="huge"><%= @processing_parts.count if @processing_parts %></div>
                                     <div>Processing Parts</div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                     <i class="fa fa-eye-slash fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><%= @inactive_devices.count %></div>
+                                    <div class="huge"><%= @inactive_devices.count if @inactive_devices %></div>
                                     <div>Inactive Devices</div>
                                 </div>
                             </div>
