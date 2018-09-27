@@ -4,7 +4,7 @@ class Tracker < ActiveRecord::Base
 	belongs_to :charts
 
 	def self.to_csv(options = {})
-		desired_columns = ["wb_id", "part_code", "employee_id", "shift", "device_id", "count", "created_at","target"]
+		desired_columns = ["wb_id", "part_code", "employee_id", "shift", "device_id", "count", "target", "datetime"]
     CSV.generate(options) do |csv|
       csv << desired_columns
       all.each do |product|
