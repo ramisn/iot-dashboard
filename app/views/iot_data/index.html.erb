@@ -279,7 +279,7 @@
                     <td id="ct"><%= iot_datum.count %></td>
                     <td><%= (iot_datum.created_at).strftime("%I:%M:%S %p") %></td>
                     <td><%= (iot_datum.updated_at).strftime("%I:%M:%S %p") %></td>
-                    <% d = @duration.find_by(part_number: (iot_datum.part_number)) %>
+                    <% d = @duration.find_by(part_number: (iot_datum.part_number), device_id: (iot_datum.device_id)) %>
                     <td><%= ((d.duration).to_datetime).strftime("%H:%M:%S") %></td>
                     <td class="action-buttons">
                       <% if iot_datum.status == 'YTS'  %> 
