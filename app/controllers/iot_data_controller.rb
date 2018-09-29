@@ -62,7 +62,9 @@ class IotDataController < ApplicationController
     @completed_parts = IotDatum.where("status = ?", 'Process Completed')
     @processing_parts = IotDatum.where("status = ?", 'Processing')
 
-    @duration = Tracker.select("(max(created_at) - min(created_at)) AS duration").group("part_code")
+    # @duration = Tracker.select("(max(created_at) - min(created_at)) AS duration").group("part_code")
+    @duration = IotDatum.select("(updated_at - created_at) AS duration")
+
     
   end
 
