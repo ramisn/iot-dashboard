@@ -56,6 +56,13 @@ class ChartsController < ApplicationController
     else
     # For PostgreSQL
       @day_wise = IotDatum.select("to_char(created_at, 'DD-MM-YYYY') as dates, to_char(created_at, 'Day') as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Day'), to_char(created_at, 'DD-MM-YYYY')")
+      @@ds_wise = IotDatum.select("to_char(created_at, 'DD-MM-YYYY') as dates, to_char(created_at, 'Day') as day_name, device_id as workbench, shift, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Day'), to_char(created_at, 'DD-MM-YYYY'), device_id, shift").order("to_char(created_at, 'DD-MM-YYYY')")
+      @ds_wise = @@ds_wise
+      puts "dswise"
+      puts @ds_wise.inspect
+      # @@dswise = IotDatum.select("to_char(created_at, 'DD-MM-YYYY') as dates, to_char(created_at, 'Day') as day_name, device_id as workbench, shift, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Day'), to_char(created_at, 'DD-MM-YYYY'), device_id, shift").order("to_char(created_at, 'DD-MM-YYYY')")
+       
+      
       @weekly = IotDatum.select("extract(WEEK from created_at)::bigint as week_no, to_char(created_at, 'DD-MM-YYYY') as dates,to_char(created_at, 'Day') as day_name,sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("extract(WEEK from created_at),to_char(created_at, 'Day'),to_char(created_at, 'DD-MM-YYYY')")
       @monthly = IotDatum.select("to_char(created_at, 'Month') as month_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Month')")
       @yearly = IotDatum.select("extract(YEAR from created_at)::bigint as year_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("extract(YEAR from created_at)")
@@ -73,6 +80,14 @@ class ChartsController < ApplicationController
 
     # puts @active_devices
 
+  end
+
+  def download_report
+    puts params[:chart_id]
+    respond_to do |format|
+      format.csv { send_data @@ds_wise.to_csvv, filename: "ds_report-#{Date.today}.csv" }
+    end
+    
   end
 
   # GET /charts/1

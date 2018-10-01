@@ -16,6 +16,7 @@
 <%= render 'boards' %>
 <%#= render 'widgets' %>
 <%= render 'detail_board' %>
+<%#= render 'data_drildown' %>
 
 <!-- <div class="timer" style="float: right;width: 353px;">
   <div class="panel panel-info">
@@ -54,7 +55,7 @@
 
 $(document).ready(function() {
       $('#day_wise').DataTable({ responsive: true, ordering: true });
-      // $('#iottt_1').DataTable({ responsive: true, ordering: true });
+      $('#ds_wise').DataTable({ responsive: true, ordering: true });
       // $('#iottt_2').DataTable({ responsive: true, ordering: true });
       
       // setInterval( function () {
@@ -88,7 +89,7 @@ $(document).ready(function() {
         $("#ruby_time").load(location.href + " #ruby_time");
         console.log('reloaded'); 
         
-      }, 1000 );
+      }, 60000 );
 
   $(document).on('click', '.panel-heading span.clickable', function(e){
     var $this = $(this);

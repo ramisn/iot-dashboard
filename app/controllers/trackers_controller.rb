@@ -23,7 +23,7 @@ class TrackersController < ApplicationController
     # @data = Tracker.order(:id)
     @track_filter = Tracker.select("wb_id, part_code, employee_id, shift, device_id, count, target, to_char(created_at,'yyyy-mm-dd HH12:MI:SS') as datetime").where("to_char(created_at,'yyyy-mm-dd') >= ? and to_char(created_at,'yyyy-mm-dd') <= ?", params[:created_at],params[:updated_at]).order(:part_code)
     respond_to do |format|
-      format.csv { send_data @track_filter.to_csv }
+      format.csv { send_data @track_filter.to_csv, filename: 'tracker_report.csv' }
     end
   end
 

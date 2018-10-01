@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :charts
+  resources :charts do
+    get :download_report
+  end
   resources :trackers
 
   post 'search' => 'trackers#search'
