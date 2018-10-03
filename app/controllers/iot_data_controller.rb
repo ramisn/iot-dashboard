@@ -29,9 +29,13 @@ class IotDataController < ApplicationController
       end
       
     if device_id != nil && part != nil
-      @iot_dataa = IotDatum.find_by(device_id: device_id, part_number: part) 
+      puts "1 begin"
+      status = 'Processing'
+      @iot_dataa = IotDatum.find_by(device_id: device_id, part_number: part, status: status) 
+      @iot_dataa.part_number
       target = @iot_dataa.target if @iot_dataa
-      if (count.to_i <= target.to_i ) && (@iot_dataa.status = 'Processing')
+      if (count.to_i <= target.to_i && @iot_dataa.status = 'Processing')
+        puts "count start"
         @iot_dataa.device_id = device_id
         @iot_dataa.count = count
         # @iot_dataa.status = 'Processing'
@@ -39,18 +43,22 @@ class IotDataController < ApplicationController
         if @iot_dataa.save
           seq_data_entry(@iot_dataa)
         end
-      elsif count.to_i == 0
+        puts "count end"
+      else count.to_i == 0
         @iot_dataa.status = 'YTS'
         @iot_dataa.save!
-      else
+      # elsif count.to_i == target
+      #   @iot_dataa.status = 'Process Completed'
+      #   @iot_dataa.save!
         redirect_to root_url, notice: 'Process Completed'
       end
 
-      if count.to_i == @iot_dataa.target
+      if count.to_i == target
         @iot_dataa.status = 'Process Completed'
         @iot_dataa.save!
         # process_start(@iot_dataa) 
       end
+      puts "1 end"
     end 
 
     @iot_data_yts = IotDatum.where("status = ?", 'YTS')
@@ -108,18 +116,26 @@ class IotDataController < ApplicationController
         # puts @deviceId.status
         @uniq_data = IotDatum.where("device_id = ? and part_number = ? and status = ?", deviceId, part_number, 'Processing');
         puts @uniq_data.count
+        puts "2 begin"
         if @uniq_data.count == 0
             @process_rec.status = 'Processing'
             @process_rec.save!
             redirect_to iot_data_path, notice: 'Process Started'
+            puts " 0 start"
         else
           @uniq_data.each do |u|
-            if u.part_number == part_number
+            puts u.part_number
+            puts u.device_id
+            puts part_number
+            if (u.part_number == part_number && u.device_id == deviceId)
+              puts "Validate"
               redirect_to iot_data_path, alert: "Part code #{part_number} is running on device No. #{deviceId}. Please Wait to complete"
             else
+              puts "other part start----"
               @process_rec.status = 'Processing'
               @process_rec.save!
               redirect_to iot_data_path, notice: 'Process Started'
+              puts "other part end----"
             end
           end
         end
