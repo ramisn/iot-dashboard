@@ -13,10 +13,11 @@
 <%#= bar_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"], prefix: "$" %>
 <%#= pie_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
 <%#= column_chart Tracker.group_by_day(:created_at).count, colors: ["#b00", "#666"] %>
+<%= render 'ratio_calculator' %>
+
 <%= render 'boards' %>
 <%#= render 'widgets' %>
 <%= render 'detail_board' %>
-<%#= render 'data_drildown' %>
 
 <!-- <div class="timer" style="float: right;width: 353px;">
   <div class="panel panel-info">

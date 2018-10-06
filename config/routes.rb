@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
+  resources :employee_productivities 
+  get 'productivity', to: 'employee_productivities#index'
+  
+
+
   resources :charts do
     get :download_report
   end
   resources :trackers
+
+  scope :ujs, defaults: { format: :ujs } do
+    patch 'thing_totals' => 'trackers#totals'
+  end
 
   post 'search' => 'trackers#search'
   resources :import  do
@@ -18,6 +27,7 @@ Rails.application.routes.draw do
     # match '/request' => 'iot_data#process_start', via: :get
     # member do
       get :process_start
+      get :download_report
       # get :print_pdf
     # end
     collection do

@@ -45,6 +45,19 @@
 </table>
 
 <br>
+<%#= link_to 'Number Alert', tracker_path, remote: true %>
+<!-- <div id="target-for-change">
+  Now you see "ME"!
+</div>
+
+Dashboard totals: <span id="dashboard-totals"><%#=
+  link_to "click me!",
+  url_for({controller: "trackers", action: "totals"}),
+  method: :patch, remote: true,
+  class: "dashboard-totals"
+%></span> -->
+
+
 
 <%#= link_to 'New Tracker', new_tracker_path %>
 <% content_for(:extra_scripts) do %>
@@ -56,5 +69,7 @@
 
     $('#datepicker .input-daterange').datepicker({
     });
+
+    $(".dashboard-totals").click();
   </script>
 <% end %>

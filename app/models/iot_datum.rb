@@ -1,7 +1,7 @@
 require 'csv'
 class IotDatum < ActiveRecord::Base
 
-# validates_uniqueness_of :part_number
+validates_presence_of :part_number
 # validates :part_number, uniqueness: {scope: :workbench_number }
 # validates_uniqueness_of :part_number, scope: :workbench_number, conditions: -> { where.not(status: 'Process Completed') && where.not(status: 'Processing')}
 # validates :part_number, uniqueness: {scope: :status }
@@ -29,8 +29,8 @@ class IotDatum < ActiveRecord::Base
     end
   end
 
-  def self.to_csvv
-    attributes = %w{dates day_name workbench shift actual target progress}
+  def self.to_report_csv
+    attributes = %w{workbench_number employee_name shift part_number target count date start_time end_time duration}
 
     CSV.generate(headers: true) do |csv|
       csv << attributes

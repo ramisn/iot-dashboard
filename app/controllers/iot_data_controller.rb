@@ -64,14 +64,14 @@ class IotDataController < ApplicationController
     @iot_data_yts = IotDatum.where("status = ?", 'YTS')
     @iot_data_pro = IotDatum.where("status = ?", 'Processing')
     @iot_data_comp = IotDatum.where("status = ?", 'Process Completed')
-
+    
     @active_devices = WorkbenchMaster.where("machine_status = ?", 'A')
     @inactive_devices = WorkbenchMaster.where("machine_status = ?", 'IA')
     @completed_parts = IotDatum.where("status = ?", 'Process Completed')
     @processing_parts = IotDatum.where("status = ?", 'Processing')
 
     # @duration = Tracker.select("(max(created_at) - min(created_at)) AS duration").group("part_code")
-    @duration = IotDatum.select("(updated_at - created_at) AS duration")
+    @duration = IotDatum.select("(updated_at - created_at) AS duration").where("status = ?", 'Process Completed')
 
     
   end
@@ -79,6 +79,15 @@ class IotDataController < ApplicationController
   # GET /iot_data/1
   # GET /iot_data/1.json
   def show
+  end
+
+  def download_report
+    puts params[:chart_id]
+    @@comp_rec = IotDatum.select("workbench_number, employee_name, shift, part_number, target, count, to_char(created_at, 'DD-MM-YYYY') as date, to_char(created_at, 'HH:MI:SS') as start_time, to_char(updated_at, 'HH:MI:SS') as end_time, to_char((updated_at - created_at),'HH24:MI:SS') as duration").where("status = ?", 'Process Completed')
+    respond_to do |format|
+      format.csv { send_data @@comp_rec.to_report_csv, filename: "ics_report-#{Date.today}.csv" }
+    end
+    
   end
 
   def seq_data_entry(data)
