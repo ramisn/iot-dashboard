@@ -22,7 +22,7 @@ gem 'chartkick', '~> 2.2.0'
 gem 'groupdate'
 gem 'bootstrap-datepicker-rails'
 
-gem 'jquery-rails'
+# gem 'jquery-rails'
 gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
 # gem 'therubyracer'
@@ -55,5 +55,5 @@ end
 group :production do
   gem 'rails_12factor'
   # gem 'pg', '~> 0.15'
-  gem 'pg', '~> 0.20.0' 
+  # gem 'pg', '~> 0.20.0' 
 end
