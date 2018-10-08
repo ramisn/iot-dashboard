@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :weight_calculators
   resources :employee_productivities 
   get 'productivity', to: 'employee_productivities#index'
   
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   resources :trackers
 
   scope :ujs, defaults: { format: :ujs } do
+    patch 'wt_totals' => 'weight_calculators#totals'
     patch 'thing_totals' => 'trackers#totals'
   end
 

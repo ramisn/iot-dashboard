@@ -37,7 +37,7 @@
             Dashboard</a>
         </li>
         <li>
-          <a href="#"><i class="fa fa-th-list fa-fw"></i> Menu<span class="fa arrow"></span></a>
+          <a href="#"><i class="fa fa-th-list fa-fw"></i> ICS Menu<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level collapse">
             <li>
               <%= link_to '<i class="fa fa-video-camera fa-fw" aria-hidden="true"></i> Workbench Planner</a>'.html_safe, iot_data_path() %>
@@ -52,7 +52,7 @@
               <%= link_to '<i class="fa fa-tasks fa-fw"></i> Trackers</a>'.html_safe, trackers_path() %>
             </li>
             <li>
-              <%#= link_to '<i class="fa fa-credit-card fa-fw"></i> Weight Calculator</a>'.html_safe, charts_path() %>
+              <%= link_to '<i class="fa fa-credit-card fa-fw"></i> Weight Calculator</a>'.html_safe, weight_calculators_path() %>
             </li>
             <li>
           <%#= link_to '<i class="fa fa-user fa-fw"></i>Profile</a>'.html_safe, user_path(current_user) %>
@@ -70,7 +70,8 @@
             <% end %>
           </ul>
         </li>
-        <!-- <li>
+        
+        <%#= render 'layouts/iems' %> <!-- <li>
           <a href="/pages/about">
             <i class="fa  fa-info-circle fa-fw"></i>
             About</a>

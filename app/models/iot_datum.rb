@@ -39,5 +39,29 @@ validates_presence_of :part_number
         csv << attributes.map{ |attr| ds.send(attr) }
       end
     end
+  end 
+
+  def self.to_ds_csv
+    attributes = %w{dates day_name workbench shift actual target progress}
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |ds|
+        csv << attributes.map{ |attr| ds.send(attr) }
+      end
+    end
+  end
+
+  def self.to_sp_csv
+    attributes = %w{dates shift part_number duration}
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |sp|
+        csv << attributes.map{ |attr| sp.send(attr) }
+      end
+    end
   end
 end

@@ -58,8 +58,9 @@ class ChartsController < ApplicationController
       @day_wise = IotDatum.select("to_char(created_at, 'DD-MM-YYYY') as dates, to_char(created_at, 'Day') as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Day'), to_char(created_at, 'DD-MM-YYYY')")
       @@ds_wise = IotDatum.select("to_char(created_at, 'DD-MM-YYYY') as dates, to_char(created_at, 'Day') as day_name, device_id as workbench, shift, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Day'), to_char(created_at, 'DD-MM-YYYY'), device_id, shift").order("to_char(created_at, 'DD-MM-YYYY')")
       @ds_wise = @@ds_wise
-      puts "dswise"
-      puts @ds_wise.inspect
+      
+      @@sp_wise = IotDatum.select("to_char(created_at, 'DD-MM-YYYY') as dates, shift, part_number, to_char(sum((updated_at - created_at)),'HH24:MI:SS') AS duration").where("status = 'Process Completed'").group("part_number,shift,to_char(created_at, 'DD-MM-YYYY')").order("part_number")
+      @sp_wise = @@sp_wise
       # @@dswise = IotDatum.select("to_char(created_at, 'DD-MM-YYYY') as dates, to_char(created_at, 'Day') as day_name, device_id as workbench, shift, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Day'), to_char(created_at, 'DD-MM-YYYY'), device_id, shift").order("to_char(created_at, 'DD-MM-YYYY')")
        
       
@@ -84,10 +85,15 @@ class ChartsController < ApplicationController
 
   def download_report
     puts params[:chart_id]
-    respond_to do |format|
-      format.csv { send_data @@ds_wise.to_csvv, filename: "ds_report-#{Date.today}.csv" }
-    end
     
+    respond_to do |format|
+      report_id = params[:chart_id]
+      if report_id == 'ds'
+        format.csv { send_data @@ds_wise.to_ds_csv, filename: "device_wise_report-#{Date.today}.csv" }
+      elsif report_id == 'sp' 
+        format.csv { send_data @@sp_wise.to_sp_csv, filename: "part_wise_report-#{Date.today}.csv" }
+      end
+    end
   end
 
   # GET /charts/1
