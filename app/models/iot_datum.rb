@@ -42,7 +42,7 @@ validates_presence_of :part_number
   end 
 
   def self.to_ds_csv
-    attributes = %w{dates day_name workbench shift actual target progress}
+    attributes = %w{dates day_name workbench shift target count duration}
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
@@ -54,7 +54,7 @@ validates_presence_of :part_number
   end
 
   def self.to_sp_csv
-    attributes = %w{dates shift part_number duration}
+    attributes = %w{dates shift workbench part_number duration}
 
     CSV.generate(headers: true) do |csv|
       csv << attributes

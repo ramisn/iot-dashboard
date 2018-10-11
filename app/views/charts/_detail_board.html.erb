@@ -96,9 +96,9 @@
                   <th>Day</th>
                   <th>WorkBench</th>
                   <th>Shift</th>
+                  <th>Count</th>
                   <th>Target</th>
-                  <th>Actual</th>
-                  <th>Progress %</th>
+                  <th>Duration</th>
                   <th colspan="3"></th>
                 </tr>
               </thead>
@@ -113,9 +113,9 @@
                     <td><%= date.day_name %></td>
                     <td><%= date.workbench %></td>
                     <td><%= date.shift %></td>
+                    <td><%= date.count %></td>
                     <td><%= date.target %></td>
-                    <td><%= date.actual %></td>
-                    <td><%= date.progress %></td>
+                    <td><%= date.duration %></td>
                   <% end %>
                   </tr> 
                 <% end %>
@@ -138,6 +138,7 @@
                 <tr>
                   <th>Date</th>
                   <th>Shift</th>
+                  <th>Workbench</th>
                   <th>Part Number</th>
                   <th>Duration</th>
                   <!-- <th>Progress %</th> -->
@@ -152,6 +153,7 @@
                   <tr>
                     <td><%= date.dates %></td>
                     <td><%= date.shift %></td>
+                    <td><%= date.workbench %></td>
                     <td><%= date.part_number %></td>
                     <td><%= date.duration %></td>
                   <% end %>
