@@ -69,6 +69,10 @@ class ChartsController < ApplicationController
       @monthly = IotDatum.select("to_char(created_at, 'Month') as month_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("to_char(created_at, 'Month')")
       @yearly = IotDatum.select("extract(YEAR from created_at)::bigint as year_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)::decimal/sum(target)::decimal) * 100),2) as progress").group("extract(YEAR from created_at)")
     end
+
+    @lb_result_cmp = IotDatum.select("employee_name, workbench_number, part_number, status, count, ROW_NUMBER() OVER (PARTITION BY status order by count desc)").where("status = 'Process Completed'").limit(5)
+    @lb_result_pro = IotDatum.select("employee_name, workbench_number, part_number, status, target, count, RANK() OVER (PARTITION BY status order by count desc)").where("status = 'Processing'")
+    
     
     # @data = [{name: "Workload", data: IotDatum.select('created_at as dates, DAYNAME(created_at) as day_name, sum(count) as actual, sum(target) as target, ROUND(((sum(count)/sum(target)) * 100),2) as progress').group('DAYNAME(created_at)')}]
     # @count_actual = ''

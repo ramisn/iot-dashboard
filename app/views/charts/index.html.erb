@@ -17,7 +17,10 @@
 
 <%= render 'boards' %>
 <%#= render 'widgets' %>
+<%= render 'leader_board' %>
 <%= render 'detail_board' %>
+
+
 
 <!-- <div class="timer" style="float: right;width: 353px;">
   <div class="panel panel-info">
@@ -58,13 +61,18 @@ $(document).ready(function() {
       $('#day_wise').DataTable({ responsive: true, ordering: true });
       $('#ds_wise').DataTable({ responsive: true, ordering: true });
       $('#sp_wise').DataTable({ responsive: true, ordering: true });
+      // $('#lb_cmp-pills').DataTable({ responsive: true, ordering: true });
+      // $('#lb_pro-pills').DataTable({ responsive: true, ordering: true });
       
-      // setInterval( function () {
-      //   $("#iottt_1").load(location.href + " #iottt_1");
-      //   $("#ruby_time").load(location.href + " #ruby_time");
-      //   // console.log('reloaded'); 
+      setInterval( function () {
+        $("#lb_cmp-pills").load(location.href + " #lb_cmp-pills");
+        $("#lb_pro-pills").load(location.href + " #lb_pro-pills");
+        // $("#container-speed").load(location.href + " #container-speed");
+        // $("#container-rpm").load(location.href + " #container-rpm");
+        // $("#ruby_time").load(location.href + " #ruby_time");
+        console.log('reloaded'); 
         
-      // }, 5000 );
+      }, 5000 );
     });
 
 // (function () {
@@ -92,20 +100,20 @@ $(document).ready(function() {
         
       }, 60000 );
 
-  $(document).on('click', '.panel-heading span.clickable', function(e){
-    var $this = $(this);
-  if(!$this.hasClass('panel-collapsed')) {
-    $this.parents('.panel').find('.panel-body').slideUp();
-    $this.addClass('panel-collapsed');
-    $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+//   $(document).on('click', '.panel-heading span.clickable', function(e){
+//     var $this = $(this);
+//   if(!$this.hasClass('panel-collapsed')) {
+//     $this.parents('.panel').find('.panel-body').slideUp();
+//     $this.addClass('panel-collapsed');
+//     $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
     
-  } else {
-    $this.parents('.panel').find('.panel-body').slideDown();
-    $this.removeClass('panel-collapsed');
-    $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+//   } else {
+//     $this.parents('.panel').find('.panel-body').slideDown();
+//     $this.removeClass('panel-collapsed');
+//     $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
     
-  }
-})
+//   }
+// })
 
   var gaugeOptions = {
 

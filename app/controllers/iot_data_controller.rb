@@ -228,9 +228,25 @@ class IotDataController < ApplicationController
   # DELETE /iot_data/1
   # DELETE /iot_data/1.json
   def destroy
-    @iot_datum.destroy
+    puts @iot_datum.count
+    if @iot_datum.count > 0
+      @deleted_rec = IotDatum.new
+      @deleted_rec.workbench_number = @iot_datum.workbench_number
+      @deleted_rec.part_number = @iot_datum.part_number
+      @deleted_rec.target = @iot_datum.target
+      @deleted_rec.lot_size = @iot_datum.lot_size
+      @deleted_rec.employee_name = @iot_datum.employee_name
+      @deleted_rec.shift = @iot_datum.shift
+      @deleted_rec.device_id = @iot_datum.device_id
+      @deleted_rec.count = @iot_datum.count
+      @deleted_rec.status = 'Deleted'
+      @deleted_rec.save!
+      @iot_datum.destroy
+    else
+      @iot_datum.destroy
+    end
     respond_to do |format|
-      format.html { redirect_to iot_data_url, notice: 'Iot datum was successfully destroyed.' }
+      format.html { redirect_to iot_data_url, notice: 'Planner was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
