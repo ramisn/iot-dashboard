@@ -14,16 +14,16 @@ class TrackersController < ApplicationController
     # render js: "alert('The number is: #{params[:id]}')"
   end
 
-  def totals
-    a = rand(0..26)
-    b = rand(0..26)
+  # def totals
+  #   a = rand(0..26)
+  #   b = rand(0..26)
 
-    value = a + b
+  #   value = a + b
 
-    # puts data
-    # value = rand(0..26) # Some expensive database query
-    render js: "$('#dashboard-totals').html('#{value}')"
-  end
+  #   # puts data
+  #   # value = rand(0..26) # Some expensive database query
+  #   render js: "$('#dashboard-totals').html('#{value}')"
+  # end
 
   # GET /trackers/new
   def new
