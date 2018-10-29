@@ -45,8 +45,8 @@ class IotDataController < ApplicationController
         end
         puts "count end"
       else count.to_i == 0
-        @iot_dataa.status = 'YTS'
-        @iot_dataa.save!
+        # @iot_dataa.status = 'YTS'
+        # @iot_dataa.save!
       # elsif count.to_i == target
       #   @iot_dataa.status = 'Process Completed'
       #   @iot_dataa.save!
