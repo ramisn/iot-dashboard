@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bar_codes
   resources :weight_calculators
   resources :employee_productivities 
   get 'productivity', to: 'employee_productivities#index'
